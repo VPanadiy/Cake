@@ -1,0 +1,58 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.6.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+jar {
+	baseName = 'Cake'
+	version = '0.0.1-SNAPSHOT'
+}
+
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-security'){
+        exclude module: 'ch.qos.logback:logback-classic'
+	}
+	compile('org.springframework.boot:spring-boot-starter-web'){
+    	exclude module: 'org.springframework.boot:spring-boot-starter-logging'
+  	}
+  	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
+  	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.2'
+  	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.2'
+  	compile group: 'org.apache.logging.log4j', name: 'log4j-jcl', version: '2.8.2'
+  	testCompile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.8.2'
+  	
+	// for security
+	compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
+
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	  
+	compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '8.5.15'
+	runtime('com.h2database:h2')
+	runtime('org.postgresql:postgresql')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.springframework.security:spring-security-test')
+}
+
+
+
