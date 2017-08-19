@@ -10,8 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		return bCryptPasswordEncoder;
+		return new BCryptPasswordEncoder();
 	}
 	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {

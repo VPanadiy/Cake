@@ -8252,3 +8252,281 @@ Using default security password: 3d2bfafb-2776-49b5-8712-b10f46fd20be
 2017-08-19 13:56:17.077  INFO 4764 --- [main] com.Aleksandr.Cake.CakeApplication       : Starting CakeApplication on DEVELOPER with PID 4764 (D:\JAVA\Cake\out\production\classes started by Администратор in D:\JAVA\Cake)
 2017-08-19 13:56:17.092  INFO 4764 --- [main] com.Aleksandr.Cake.CakeApplication       : No active profile set, falling back to default profiles: default
 2017-08-19 13:56:17.950  INFO 4764 --- [main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1b410b60: startup date [Sat Aug 19 13:56:17 EEST 2017]; root of context hierarchy
+2017-08-19 22:06:21.650  INFO 4044 --- [main] o.s.boot.SpringApplication               : 
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m      [2m (v1.5.6.RELEASE)[0;39m
+
+
+2017-08-19 22:06:22.208  INFO 4044 --- [main] com.Aleksandr.Cake.CakeApplication       : Starting CakeApplication on DREAM with PID 4044 (D:\MyProjects(JAVA)\Cake\build\classes\java\main started by Администратор in D:\MyProjects(JAVA)\Cake)
+2017-08-19 22:06:22.208  INFO 4044 --- [main] com.Aleksandr.Cake.CakeApplication       : No active profile set, falling back to default profiles: default
+2017-08-19 22:06:23.156  INFO 4044 --- [main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7fad8c79: startup date [Sat Aug 19 22:06:23 EEST 2017]; root of context hierarchy
+2017-08-19 22:06:26.458  INFO 4044 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8000 (http)
+2017-08-19 22:06:26.508  INFO 4044 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2017-08-19 22:06:26.508  INFO 4044 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2017-08-19 22:06:26.958  INFO 4044 --- [localhost-startStop-1] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2017-08-19 22:06:26.958  INFO 4044 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-08-19 22:06:26.958  INFO 4044 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3802 ms
+2017-08-19 22:06:27.238  INFO 4044 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-08-19 22:06:27.238  INFO 4044 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-08-19 22:06:27.238  INFO 4044 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-08-19 22:06:27.238  INFO 4044 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-08-19 22:06:27.238  INFO 4044 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2017-08-19 22:06:27.248  INFO 4044 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-08-19 22:06:28.540  INFO 4044 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-08-19 22:06:36.462  INFO 4044 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-08-19 22:06:37.622  INFO 4044 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/resources/**'], []
+2017-08-19 22:06:37.622  INFO 4044 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/static/**'], []
+2017-08-19 22:06:37.622  INFO 4044 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/css/**'], []
+2017-08-19 22:06:37.622  INFO 4044 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/js/**'], []
+2017-08-19 22:06:37.622  INFO 4044 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/images/**'], []
+2017-08-19 22:06:37.742  INFO 4044 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5384ce66, org.springframework.security.web.context.SecurityContextPersistenceFilter@37775bb1, org.springframework.security.web.header.HeaderWriterFilter@2d4a3e13, org.springframework.security.web.authentication.logout.LogoutFilter@39652a30, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@578c3fd9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2d206a71, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1c6a0103, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6b42e36d, org.springframework.security.web.session.SessionManagementFilter@d8835af, org.springframework.security.web.access.ExceptionTranslationFilter@545d2560, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6562cc23]
+2017-08-19 22:06:38.152  INFO 4044 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7fad8c79: startup date [Sat Aug 19 22:06:23 EEST 2017]; root of context hierarchy
+2017-08-19 22:06:38.282  INFO 4044 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/home],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.home()
+2017-08-19 22:06:38.282  INFO 4044 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/registration],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.registration()
+2017-08-19 22:06:38.282  INFO 4044 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/registration],methods=[POST]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.createNewUser(com.Aleksandr.Cake.model.User,org.springframework.validation.BindingResult)
+2017-08-19 22:06:38.282  INFO 4044 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/ || /login],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.login()
+2017-08-19 22:06:38.282  INFO 4044 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/index]}" onto public java.lang.String com.Aleksandr.Cake.controller.ReadingListController.home()
+2017-08-19 22:06:38.282  INFO 4044 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/{reader}],methods=[GET]}" onto public java.lang.String com.Aleksandr.Cake.controller.ReadingListController.readersBooks(java.lang.String,org.springframework.ui.Model)
+2017-08-19 22:06:38.282  INFO 4044 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/{reader}],methods=[POST]}" onto public java.lang.String com.Aleksandr.Cake.controller.ReadingListController.addToReadingList(java.lang.String,com.Aleksandr.Cake.model.Book)
+2017-08-19 22:06:38.292  INFO 4044 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-08-19 22:06:38.292  INFO 4044 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-08-19 22:06:38.342  INFO 4044 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/*.js/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 22:06:38.342  INFO 4044 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/*.css/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 22:06:38.342  INFO 4044 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 22:06:38.342  INFO 4044 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 22:06:38.432  INFO 4044 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 22:06:39.312  INFO 4044 --- [main] b.a.s.AuthenticationManagerConfiguration : 
+
+Using default security password: 9914e28a-396f-4d21-8d97-f0eb34ed81d5
+
+2017-08-19 22:06:39.612  INFO 4044 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-08-19 22:06:40.542  INFO 4044 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8000 (http)
+2017-08-19 22:06:40.692  INFO 4044 --- [main] com.Aleksandr.Cake.CakeApplication       : Started CakeApplication in 19.714 seconds (JVM running for 20.878)
+2017-08-19 22:28:55.836  INFO 4804 --- [main] o.s.boot.SpringApplication               : 
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m      [2m (v1.5.6.RELEASE)[0;39m
+
+
+2017-08-19 22:28:56.274  INFO 4804 --- [main] com.Aleksandr.Cake.CakeApplication       : Starting CakeApplication on DREAM with PID 4804 (D:\MyProjects(JAVA)\Cake\build\classes\java\main started by Администратор in D:\MyProjects(JAVA)\Cake)
+2017-08-19 22:28:56.274  INFO 4804 --- [main] com.Aleksandr.Cake.CakeApplication       : No active profile set, falling back to default profiles: default
+2017-08-19 22:28:57.673  INFO 4804 --- [main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7fad8c79: startup date [Sat Aug 19 22:28:57 EEST 2017]; root of context hierarchy
+2017-08-19 22:29:00.816  INFO 4804 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8000 (http)
+2017-08-19 22:29:00.826  INFO 4804 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2017-08-19 22:29:00.836  INFO 4804 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2017-08-19 22:29:01.276  INFO 4804 --- [localhost-startStop-1] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2017-08-19 22:29:01.286  INFO 4804 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-08-19 22:29:01.286  INFO 4804 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3625 ms
+2017-08-19 22:29:01.566  INFO 4804 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-08-19 22:29:01.566  INFO 4804 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-08-19 22:29:01.566  INFO 4804 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-08-19 22:29:01.566  INFO 4804 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-08-19 22:29:01.576  INFO 4804 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2017-08-19 22:29:01.576  INFO 4804 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-08-19 22:29:02.606  INFO 4804 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-08-19 22:29:05.708  INFO 4804 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-08-19 22:29:07.138  INFO 4804 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/resources/**'], []
+2017-08-19 22:29:07.138  INFO 4804 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/static/**'], []
+2017-08-19 22:29:07.138  INFO 4804 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/css/**'], []
+2017-08-19 22:29:07.138  INFO 4804 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/js/**'], []
+2017-08-19 22:29:07.138  INFO 4804 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/images/**'], []
+2017-08-19 22:29:07.278  INFO 4804 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@125f16b2, org.springframework.security.web.context.SecurityContextPersistenceFilter@6aae0e6f, org.springframework.security.web.header.HeaderWriterFilter@10817f46, org.springframework.security.web.authentication.logout.LogoutFilter@78c74647, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@53ea380b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7b9e25bd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6aea99e7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5384ce66, org.springframework.security.web.session.SessionManagementFilter@4a22e4d7, org.springframework.security.web.access.ExceptionTranslationFilter@50e5032c, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7e191fda]
+2017-08-19 22:29:07.858  INFO 4804 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7fad8c79: startup date [Sat Aug 19 22:28:57 EEST 2017]; root of context hierarchy
+2017-08-19 22:29:07.988  INFO 4804 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/home],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.home()
+2017-08-19 22:29:07.998  INFO 4804 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/registration],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.registration()
+2017-08-19 22:29:07.998  INFO 4804 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/registration],methods=[POST]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.createNewUser(com.Aleksandr.Cake.model.User,org.springframework.validation.BindingResult)
+2017-08-19 22:29:07.998  INFO 4804 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/ || /login],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.login()
+2017-08-19 22:29:07.998  INFO 4804 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/index]}" onto public java.lang.String com.Aleksandr.Cake.controller.ReadingListController.home()
+2017-08-19 22:29:07.998  INFO 4804 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/{reader}],methods=[GET]}" onto public java.lang.String com.Aleksandr.Cake.controller.ReadingListController.readersBooks(java.lang.String,org.springframework.ui.Model)
+2017-08-19 22:29:07.998  INFO 4804 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/{reader}],methods=[POST]}" onto public java.lang.String com.Aleksandr.Cake.controller.ReadingListController.addToReadingList(java.lang.String,com.Aleksandr.Cake.model.Book)
+2017-08-19 22:29:07.998  INFO 4804 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-08-19 22:29:07.998  INFO 4804 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-08-19 22:29:08.058  INFO 4804 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/*.js/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 22:29:08.058  INFO 4804 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/*.css/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 22:29:08.058  INFO 4804 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 22:29:08.058  INFO 4804 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 22:29:08.158  INFO 4804 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 22:29:09.088  INFO 4804 --- [main] b.a.s.AuthenticationManagerConfiguration : 
+
+Using default security password: 32851194-45e4-44ae-a339-754eb87910b0
+
+2017-08-19 22:29:09.318  INFO 4804 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-08-19 22:29:09.478  INFO 4804 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8000 (http)
+2017-08-19 22:29:09.488  INFO 4804 --- [main] com.Aleksandr.Cake.CakeApplication       : Started CakeApplication in 14.266 seconds (JVM running for 15.633)
+2017-08-19 23:15:59.143  INFO 3472 --- [main] o.s.boot.SpringApplication               : 
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m      [2m (v1.5.6.RELEASE)[0;39m
+
+
+2017-08-19 23:15:59.281  INFO 3472 --- [main] com.Aleksandr.Cake.CakeApplication       : Starting CakeApplication on DREAM with PID 3472 (D:\MyProjects(JAVA)\Cake\build\classes\java\main started by Администратор in D:\MyProjects(JAVA)\Cake)
+2017-08-19 23:15:59.281  INFO 3472 --- [main] com.Aleksandr.Cake.CakeApplication       : No active profile set, falling back to default profiles: default
+2017-08-19 23:15:59.822  INFO 3472 --- [main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4df828d7: startup date [Sat Aug 19 23:15:59 EEST 2017]; root of context hierarchy
+2017-08-19 23:16:03.109  INFO 3472 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8000 (http)
+2017-08-19 23:16:03.129  INFO 3472 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2017-08-19 23:16:03.129  INFO 3472 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2017-08-19 23:16:03.479  INFO 3472 --- [localhost-startStop-1] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2017-08-19 23:16:03.489  INFO 3472 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-08-19 23:16:03.489  INFO 3472 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3680 ms
+2017-08-19 23:16:03.749  INFO 3472 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-08-19 23:16:03.749  INFO 3472 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-08-19 23:16:03.749  INFO 3472 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-08-19 23:16:03.749  INFO 3472 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-08-19 23:16:03.749  INFO 3472 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2017-08-19 23:16:03.749  INFO 3472 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-08-19 23:16:04.641  INFO 3472 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-08-19 23:16:06.635  INFO 3472 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-08-19 23:16:07.625  INFO 3472 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/resources/**'], []
+2017-08-19 23:16:07.625  INFO 3472 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/static/**'], []
+2017-08-19 23:16:07.625  INFO 3472 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/css/**'], []
+2017-08-19 23:16:07.625  INFO 3472 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/js/**'], []
+2017-08-19 23:16:07.625  INFO 3472 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/images/**'], []
+2017-08-19 23:16:07.755  INFO 3472 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@99a8de3, org.springframework.security.web.context.SecurityContextPersistenceFilter@203e705e, org.springframework.security.web.header.HeaderWriterFilter@45c80312, org.springframework.security.web.authentication.logout.LogoutFilter@20256a0b, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@9b367c8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@39652a30, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@723742b2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@87f501f, org.springframework.security.web.session.SessionManagementFilter@377dfb8d, org.springframework.security.web.access.ExceptionTranslationFilter@565d7d2f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@13192275]
+2017-08-19 23:16:08.145  INFO 3472 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4df828d7: startup date [Sat Aug 19 23:15:59 EEST 2017]; root of context hierarchy
+2017-08-19 23:16:08.245  INFO 3472 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/home],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.home()
+2017-08-19 23:16:08.255  INFO 3472 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/registration],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.registration()
+2017-08-19 23:16:08.255  INFO 3472 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/registration],methods=[POST]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.createNewUser(com.Aleksandr.Cake.model.User,org.springframework.validation.BindingResult)
+2017-08-19 23:16:08.255  INFO 3472 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/ || /login],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.login()
+2017-08-19 23:16:08.255  INFO 3472 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/index]}" onto public java.lang.String com.Aleksandr.Cake.controller.ReadingListController.home()
+2017-08-19 23:16:08.255  INFO 3472 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/{reader}],methods=[GET]}" onto public java.lang.String com.Aleksandr.Cake.controller.ReadingListController.readersBooks(java.lang.String,org.springframework.ui.Model)
+2017-08-19 23:16:08.255  INFO 3472 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/{reader}],methods=[POST]}" onto public java.lang.String com.Aleksandr.Cake.controller.ReadingListController.addToReadingList(java.lang.String,com.Aleksandr.Cake.model.Book)
+2017-08-19 23:16:08.265  INFO 3472 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-08-19 23:16:08.265  INFO 3472 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-08-19 23:16:08.305  INFO 3472 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/*.js/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 23:16:08.305  INFO 3472 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/*.css/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 23:16:08.305  INFO 3472 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 23:16:08.305  INFO 3472 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 23:16:08.365  INFO 3472 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 23:16:09.155  INFO 3472 --- [main] b.a.s.AuthenticationManagerConfiguration : 
+
+Using default security password: 5eb2bd3b-8ca5-4025-b449-72bcddc03da5
+
+2017-08-19 23:16:09.405  INFO 3472 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-08-19 23:16:09.565  INFO 3472 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8000 (http)
+2017-08-19 23:16:09.575  INFO 3472 --- [main] com.Aleksandr.Cake.CakeApplication       : Started CakeApplication in 11.124 seconds (JVM running for 12.727)
+2017-08-19 23:36:32.821  INFO 4596 --- [main] o.s.boot.SpringApplication               : 
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m      [2m (v1.5.6.RELEASE)[0;39m
+
+
+2017-08-19 23:36:32.963  INFO 4596 --- [main] com.Aleksandr.Cake.CakeApplication       : Starting CakeApplication on DREAM with PID 4596 (D:\MyProjects(JAVA)\Cake\build\classes\java\main started by Администратор in D:\MyProjects(JAVA)\Cake)
+2017-08-19 23:36:32.963  INFO 4596 --- [main] com.Aleksandr.Cake.CakeApplication       : No active profile set, falling back to default profiles: default
+2017-08-19 23:36:33.829  INFO 4596 --- [main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4df828d7: startup date [Sat Aug 19 23:36:33 EEST 2017]; root of context hierarchy
+2017-08-19 23:36:37.015  INFO 4596 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8000 (http)
+2017-08-19 23:36:37.035  INFO 4596 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2017-08-19 23:36:37.035  INFO 4596 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2017-08-19 23:36:37.385  INFO 4596 --- [localhost-startStop-1] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2017-08-19 23:36:37.385  INFO 4596 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-08-19 23:36:37.385  INFO 4596 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3562 ms
+2017-08-19 23:36:37.635  INFO 4596 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-08-19 23:36:37.635  INFO 4596 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-08-19 23:36:37.635  INFO 4596 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-08-19 23:36:37.635  INFO 4596 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-08-19 23:36:37.635  INFO 4596 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2017-08-19 23:36:37.635  INFO 4596 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-08-19 23:36:38.445  INFO 4596 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-08-19 23:36:40.249  INFO 4596 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-08-19 23:36:41.109  INFO 4596 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/resources/**'], []
+2017-08-19 23:36:41.109  INFO 4596 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/static/**'], []
+2017-08-19 23:36:41.109  INFO 4596 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/css/**'], []
+2017-08-19 23:36:41.109  INFO 4596 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/js/**'], []
+2017-08-19 23:36:41.109  INFO 4596 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/images/**'], []
+2017-08-19 23:36:41.229  INFO 4596 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2ce524d2, org.springframework.security.web.context.SecurityContextPersistenceFilter@1ee40b5c, org.springframework.security.web.header.HeaderWriterFilter@7eb27768, org.springframework.security.web.authentication.logout.LogoutFilter@3079c26a, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3f048c86, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@703e8050, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4a22e4d7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3869a6e5, org.springframework.security.web.session.SessionManagementFilter@5e3db14, org.springframework.security.web.access.ExceptionTranslationFilter@5ca4dce5, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@340afaf8]
+2017-08-19 23:36:41.579  INFO 4596 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4df828d7: startup date [Sat Aug 19 23:36:33 EEST 2017]; root of context hierarchy
+2017-08-19 23:36:41.669  INFO 4596 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/home],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.home()
+2017-08-19 23:36:41.669  INFO 4596 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/registration],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.registration()
+2017-08-19 23:36:41.669  INFO 4596 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/ || /login],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.login()
+2017-08-19 23:36:41.679  INFO 4596 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/registration],methods=[POST]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.createNewUser(com.Aleksandr.Cake.model.User,org.springframework.validation.BindingResult)
+2017-08-19 23:36:41.679  INFO 4596 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/index]}" onto public java.lang.String com.Aleksandr.Cake.controller.ReadingListController.home()
+2017-08-19 23:36:41.679  INFO 4596 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/{reader}],methods=[GET]}" onto public java.lang.String com.Aleksandr.Cake.controller.ReadingListController.readersBooks(java.lang.String,org.springframework.ui.Model)
+2017-08-19 23:36:41.679  INFO 4596 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/{reader}],methods=[POST]}" onto public java.lang.String com.Aleksandr.Cake.controller.ReadingListController.addToReadingList(java.lang.String,com.Aleksandr.Cake.model.Book)
+2017-08-19 23:36:41.679  INFO 4596 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-08-19 23:36:41.679  INFO 4596 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-08-19 23:36:41.729  INFO 4596 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/*.js/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 23:36:41.729  INFO 4596 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/*.css/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 23:36:41.729  INFO 4596 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 23:36:41.729  INFO 4596 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 23:36:41.789  INFO 4596 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 23:36:42.519  INFO 4596 --- [main] b.a.s.AuthenticationManagerConfiguration : 
+
+Using default security password: 1ecf9c2f-5835-4422-8fa7-416936853deb
+
+2017-08-19 23:36:42.739  INFO 4596 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-08-19 23:36:42.909  INFO 4596 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8000 (http)
+2017-08-19 23:36:42.909  INFO 4596 --- [main] com.Aleksandr.Cake.CakeApplication       : Started CakeApplication in 10.5 seconds (JVM running for 11.396)
+2017-08-19 23:36:58.689  INFO 4596 --- [http-nio-8000-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2017-08-19 23:36:58.689  INFO 4596 --- [http-nio-8000-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2017-08-19 23:36:58.729  INFO 4596 --- [http-nio-8000-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 40 ms
+2017-08-19 23:40:45.080  INFO 4280 --- [main] o.s.boot.SpringApplication               : 
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m      [2m (v1.5.6.RELEASE)[0;39m
+
+
+2017-08-19 23:40:45.192  INFO 4280 --- [main] com.Aleksandr.Cake.CakeApplication       : Starting CakeApplication on DREAM with PID 4280 (D:\MyProjects(JAVA)\Cake\build\classes\java\main started by Администратор in D:\MyProjects(JAVA)\Cake)
+2017-08-19 23:40:45.192  INFO 4280 --- [main] com.Aleksandr.Cake.CakeApplication       : No active profile set, falling back to default profiles: default
+2017-08-19 23:40:45.798  INFO 4280 --- [main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4df828d7: startup date [Sat Aug 19 23:40:45 EEST 2017]; root of context hierarchy
+2017-08-19 23:40:49.340  INFO 4280 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8000 (http)
+2017-08-19 23:40:49.360  INFO 4280 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2017-08-19 23:40:49.360  INFO 4280 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.16
+2017-08-19 23:40:49.750  INFO 4280 --- [localhost-startStop-1] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2017-08-19 23:40:49.750  INFO 4280 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-08-19 23:40:49.750  INFO 4280 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3958 ms
+2017-08-19 23:40:50.050  INFO 4280 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-08-19 23:40:50.050  INFO 4280 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-08-19 23:40:50.050  INFO 4280 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-08-19 23:40:50.050  INFO 4280 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-08-19 23:40:50.050  INFO 4280 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2017-08-19 23:40:50.050  INFO 4280 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-08-19 23:40:50.830  INFO 4280 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-08-19 23:40:52.514  INFO 4280 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-08-19 23:40:53.374  INFO 4280 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/resources/**'], []
+2017-08-19 23:40:53.374  INFO 4280 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/static/**'], []
+2017-08-19 23:40:53.374  INFO 4280 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/css/**'], []
+2017-08-19 23:40:53.374  INFO 4280 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/js/**'], []
+2017-08-19 23:40:53.374  INFO 4280 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/images/**'], []
+2017-08-19 23:40:53.494  INFO 4280 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3f048c86, org.springframework.security.web.context.SecurityContextPersistenceFilter@7eb27768, org.springframework.security.web.header.HeaderWriterFilter@2aea717c, org.springframework.security.web.authentication.logout.LogoutFilter@37775bb1, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@226d5af0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5e3db14, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@545d2560, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@255d9277, org.springframework.security.web.session.SessionManagementFilter@1291aab5, org.springframework.security.web.access.ExceptionTranslationFilter@3e53c4ad, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5122e4bf]
+2017-08-19 23:40:53.844  INFO 4280 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4df828d7: startup date [Sat Aug 19 23:40:45 EEST 2017]; root of context hierarchy
+2017-08-19 23:40:53.934  INFO 4280 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin/home],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.home()
+2017-08-19 23:40:53.934  INFO 4280 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/registration],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.registration()
+2017-08-19 23:40:53.934  INFO 4280 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/registration],methods=[POST]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.createNewUser(com.Aleksandr.Cake.model.User,org.springframework.validation.BindingResult)
+2017-08-19 23:40:53.934  INFO 4280 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/ || /login],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.Aleksandr.Cake.controller.LoginController.login()
+2017-08-19 23:40:53.934  INFO 4280 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/index]}" onto public java.lang.String com.Aleksandr.Cake.controller.ReadingListController.home()
+2017-08-19 23:40:53.934  INFO 4280 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/{reader}],methods=[GET]}" onto public java.lang.String com.Aleksandr.Cake.controller.ReadingListController.readersBooks(java.lang.String,org.springframework.ui.Model)
+2017-08-19 23:40:53.934  INFO 4280 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/{reader}],methods=[POST]}" onto public java.lang.String com.Aleksandr.Cake.controller.ReadingListController.addToReadingList(java.lang.String,com.Aleksandr.Cake.model.Book)
+2017-08-19 23:40:53.944  INFO 4280 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-08-19 23:40:53.944  INFO 4280 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-08-19 23:40:53.994  INFO 4280 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/*.js/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 23:40:53.994  INFO 4280 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/*.css/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 23:40:53.994  INFO 4280 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 23:40:53.994  INFO 4280 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 23:40:54.044  INFO 4280 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-08-19 23:40:54.644  INFO 4280 --- [main] b.a.s.AuthenticationManagerConfiguration : 
+
+Using default security password: 39459b7f-c8f8-4a11-ab78-e9159697e887
+
+2017-08-19 23:40:54.844  INFO 4280 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-08-19 23:40:54.944  INFO 4280 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8000 (http)
+2017-08-19 23:40:54.954  INFO 4280 --- [main] com.Aleksandr.Cake.CakeApplication       : Started CakeApplication in 10.314 seconds (JVM running for 11.206)

@@ -23,3 +23,12 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+bin/templates/auth/
+out/
+src/main/resources/templates/auth/
+src/test/resources/
+.gradle/
+.idea/
+.settings/
+bin/com/Aleksandr/Cake/.gradle/
+src/main/java/com/Aleksandr/Cake/.gradle/
