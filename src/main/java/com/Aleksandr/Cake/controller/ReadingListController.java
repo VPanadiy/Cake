@@ -16,7 +16,6 @@ import com.Aleksandr.Cake.repository.ReadingListRepository;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
 @ConfigurationProperties(prefix = "amazon")
 public class ReadingListController {
 	private ReadingListRepository readingListRepository;

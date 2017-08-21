@@ -2,6 +2,8 @@ package com.Aleksandr.Cake.controller;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,8 +18,9 @@ import com.Aleksandr.Cake.serviceSecurity.UserService;
 
 
 @Controller
+@RequestMapping("/")
 public class LoginController {
-	
+	private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@Autowired
 	private UserService userService;
 
@@ -25,6 +28,7 @@ public class LoginController {
 	public ModelAndView login(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
+		logger.info("Use method login() and " + modelAndView.toString());
 		return modelAndView;
 	}
 	
@@ -46,6 +50,7 @@ public class LoginController {
 			bindingResult
 					.rejectValue("email", "error.user",
 							"There is already a user registered with the email provided");
+		logger.info(userExists.getEmail() + "-------------------------------------------------------");
 		}
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("registration");
@@ -54,7 +59,6 @@ public class LoginController {
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
-			
 		}
 		return modelAndView;
 	}
@@ -63,6 +67,7 @@ public class LoginController {
 	public ModelAndView home(){
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		logger.info("Use method home() and " + modelAndView.toString());
 		User user = userService.findUserByEmail(auth.getName());
 		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
 		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");

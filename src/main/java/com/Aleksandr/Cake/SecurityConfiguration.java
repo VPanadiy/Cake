@@ -20,22 +20,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 * Line 21 → password encoder reference implemented in WebMvcConfig.java Line 24
 	 * → data source implemented out of the box by Spring Boot. We only need to
 	 * provide the database information in the application.properties file (please
-	 * see the reference below). 
+	 * see the reference below).
 	 * Lines 27 and 30 → Reference to user and role
 	 * queries stored in application.properties file (please see the reference
-	 * below). 
+	 * below).
 	 * Lines from 33 to 41 → AuthenticationManagerBuilder provides a
 	 * mechanism to get a user based on the password encoder, data source, user
-	 * query and role query. 
+	 * query and role query.
 	 * Lines from 44 to 61 → Here we define the antMatchers to
 	 * provide access based on the role(s) (lines 48 to 51), the parameters for the
 	 * login process (lines 55 to 56), the success login page(line 53), the failure
-	 * login page(line 53), and the logout page (line 58). 
+	 * login page(line 53), and the logout page (line 58).
 	 * Lines from 64 to 68 → Due
 	 * we have implemented Spring Security we need to let Spring knows that our
 	 * resources folder can be served skipping the antMatchers defined.
 	 */
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -62,6 +62,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers("/login").permitAll()
 			.antMatchers("/registration").permitAll()
 			.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest().authenticated()
+		    .antMatchers("/user/**").hasAnyRole("USER")
 		.and().csrf().disable()
 			.formLogin().loginPage("/login").failureUrl("/login?error=true")
 			.defaultSuccessUrl("/admin/home").usernameParameter("email").passwordParameter("password")
