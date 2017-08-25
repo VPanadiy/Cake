@@ -5,7 +5,9 @@
 </head>
 <body>
 <p>Cake</p>
-
+<div>
+    <div lang="en" th:include="include/authorization :: registration"></div>
+</div>
 <div class="top_menu">
     <a href="#" alt="General">General</a>
     <a href="#" alt="Our products">Our products</a>
@@ -14,5 +16,7 @@
     <a href="#" alt="Delivery">Delivery</a>
     <a href="#" alt="Ingredients">Ingredients</a>
 </div>
+
+<div lang="en" th:include="include/footer :: footer"></div>
 </body>
 </html>
