@@ -8,9 +8,12 @@
 </head>
 
 <body>
-
-<div lang="en" th:include="include/authorization :: registration"></div>
-
+<div th:if="${isUser}">
+    <div lang="en" th:include="include/authorization :: user"> </div>
+</div>
+<div th:unless="${isUser}">
+    <div lang="en" th:include="include/authorization :: registration"></div>
+</div>
 <div lang="en" th:include="include/footer :: footer"></div>
 </body>
 </html>

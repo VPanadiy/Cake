@@ -2,6 +2,7 @@ package com.Aleksandr.Cake.controller;
 
 import javax.validation.Valid;
 
+import com.Aleksandr.Cake.model.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.Aleksandr.Cake.model.User;
 import com.Aleksandr.Cake.serviceSecurity.UserService;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 
 @Controller
-@RequestMapping("/")
 public class LoginController {
 	private final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 	@Autowired
@@ -29,6 +34,17 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
 		LOGGER.info("Use method login() and " + modelAndView.toString());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		if(user != null) {
+			modelAndView.addObject("isUser", true);
+			modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+			modelAndView.addObject("message", "Content Available Only for Users with Admin Role");
+			LOGGER.info("Use method login() after find user and " + modelAndView.toString());
+		} else {
+			modelAndView.addObject("isUser", false);
+			LOGGER.info("Use method login() user == null " + modelAndView.toString());
+		}
 		return modelAndView;
 	}
 	
@@ -71,6 +87,7 @@ public class LoginController {
 		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
 		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
 		modelAndView.setViewName("admin/home");
+		LOGGER.info("Use method home() after find user and " + modelAndView.toString());
 		return modelAndView;
 	}
 	
