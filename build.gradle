@@ -30,7 +30,7 @@ repositories {
 compileJava.dependsOn(processResources)
 
 dependencies {
-	optional ('org.springframework.boot:spring-boot-configuration-processor')
+	
 
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-security'){
