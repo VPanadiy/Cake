@@ -1,0 +1,8 @@
+<div th:fragment="form" xmlns:th="http://www.w3.org/1999/xhtml">
+	<div th:if="${isUser}">
+		<div lang="en" th:include="include/authorization :: user"></div>
+	</div>
+	<div th:unless="${isUser}">
+		<div lang="en" th:include="include/authorization :: registration"></div>
+	</div>
+</div>

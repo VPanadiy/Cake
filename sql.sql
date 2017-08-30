@@ -33,8 +33,10 @@ CREATE TABLE role (
   role_id SERIAL PRIMARY KEY,
   role varchar(255) DEFAULT NULL
 );
+
 INSERT INTO role (role) VALUES ('ADMIN');
 INSERT INTO role (role) VALUES ('USER');
+
 select * from role;
 
 DROP TABLE user;
@@ -50,8 +52,8 @@ CREATE TABLE users (
 
 select * from users;
 
-
 DROP TABLE user_role;
+
 CREATE TABLE user_role (
   user_id int REFERENCES users (user_id),
   role_id int REFERENCES role (role_id)

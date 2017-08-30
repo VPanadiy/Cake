@@ -1,5 +1,10 @@
 package com.Aleksandr.Cake;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -12,7 +17,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -57,21 +68,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.dataSource(dataSource)
 				.passwordEncoder(bCryptPasswordEncoder);
 	}
-
+	
+    @Autowired
+    CustomSuccessHandler customSuccessHandler;
+    
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		LOGGER.info("Start class SecurityConfiguration with role!!");
 		http.authorizeRequests()
-			.antMatchers("/").permitAll()
-			.antMatchers("/login").permitAll()
-			.antMatchers("/registration").permitAll()
-			.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest().authenticated()
-		    .antMatchers("/user/**").hasAnyRole("USER")
+			.antMatchers("/", "/index", "/registration").permitAll()
+			.antMatchers("/admin/**").hasAuthority("ADMIN")
+		    .antMatchers("/user/**").hasAuthority("USER").anyRequest().authenticated() //this method anyRequest().authenticated() must be after all roles
 		.and().csrf().disable()
-			.formLogin().loginPage("/login").failureUrl("/login?error=true")
-			.defaultSuccessUrl("/admin/home").usernameParameter("email").passwordParameter("password")
+			.formLogin().loginPage("/index").failureUrl("/index?error=true").successHandler(customSuccessHandler)			
+//			.defaultSuccessUrl("/admin/home")
+			.usernameParameter("email").passwordParameter("password")
 		.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+			.invalidateHttpSession(true).deleteCookies("JSESSIONID")  
 		.and()
 			.exceptionHandling().accessDeniedPage("/access-denied");
 	}
@@ -80,5 +94,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
 	}
+
 
 }

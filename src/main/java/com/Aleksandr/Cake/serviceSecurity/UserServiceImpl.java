@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByEmail(String email) {
         User user = userRepository.findByEmail(email);
-        LOGGER.info("Find user by email: " + user);
+        LOGGER.info("-- Find user by email: " + user + "! With email " + email);
         return user;
     }
 
@@ -37,9 +37,9 @@ public class UserServiceImpl implements UserService {
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
-        Role userRole = roleRepository.findByRole("ADMIN");
+        Role userRole = roleRepository.findByRole("USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-        LOGGER.info("Save user in DB! " + user);
+        LOGGER.info("-- Save user with role USER in DB! " + user);
         userRepository.save(user);
     }
 
