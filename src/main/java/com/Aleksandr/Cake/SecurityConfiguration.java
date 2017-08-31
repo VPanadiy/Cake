@@ -1,10 +1,5 @@
 package com.Aleksandr.Cake;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -17,13 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.DefaultRedirectStrategy;
-import org.springframework.security.web.RedirectStrategy;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -61,6 +50,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Value("${spring.queries.roles-query}")
 	private String rolesQuery;
 
+	@Autowired
+	CustomSuccessHandler customSuccessHandler;
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		LOGGER.info("Start class SecurityConfiguration!!!");
@@ -69,19 +61,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.passwordEncoder(bCryptPasswordEncoder);
 	}
 	
-    @Autowired
-    CustomSuccessHandler customSuccessHandler;
     
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		LOGGER.info("Start class SecurityConfiguration with role!!");
+		LOGGER.info("-- Start class SecurityConfiguration with role!!");
 		http.authorizeRequests()
 			.antMatchers("/", "/index", "/registration").permitAll()
 			.antMatchers("/admin/**").hasAuthority("ADMIN")
 		    .antMatchers("/user/**").hasAuthority("USER").anyRequest().authenticated() //this method anyRequest().authenticated() must be after all roles
 		.and().csrf().disable()
-			.formLogin().loginPage("/index").failureUrl("/index?error=true").successHandler(customSuccessHandler)			
-//			.defaultSuccessUrl("/admin/home")
+		// in class customSuccessHandler makes all mapping after authenticated. For simple request use  method (.defaultSuccessUrl("/admin/home"))
+		.formLogin().loginPage("/index").failureUrl("/index?error=true").successHandler(customSuccessHandler) 
 			.usernameParameter("email").passwordParameter("password")
 		.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
