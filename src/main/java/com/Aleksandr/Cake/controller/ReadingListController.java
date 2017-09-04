@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.Aleksandr.Cake.model.Book;
 import com.Aleksandr.Cake.repository.ReadingListRepository;
-import com.Aleksandr.utils.CONST;
 
-import static com.Aleksandr.utils.CONST.URL_INDEX;
+import static com.Aleksandr.utils.CONST.*;
 
 import java.util.List;
 
