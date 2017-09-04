@@ -2,6 +2,8 @@ package com.Aleksandr.Cake;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -35,7 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 * we have implemented Spring Security we need to let Spring knows that our
 	 * resources folder can be served skipping the antMatchers defined.
 	 */
-
+	private final Logger LOGGER = LoggerFactory.getLogger(SecurityConfiguration.class);
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -48,26 +50,32 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Value("${spring.queries.roles-query}")
 	private String rolesQuery;
 
+	@Autowired
+	CustomSuccessHandler customSuccessHandler;
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		LOGGER.info("Start class SecurityConfiguration!!!");
 		auth.jdbcAuthentication().usersByUsernameQuery(usersQuery).authoritiesByUsernameQuery(rolesQuery)
-				.dataSource(dataSource).passwordEncoder(bCryptPasswordEncoder);
+				.dataSource(dataSource)
+				.passwordEncoder(bCryptPasswordEncoder);
 	}
-
+	
+    
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
+		LOGGER.info("-- Start class SecurityConfiguration with role!!");
 		http.authorizeRequests()
-			.antMatchers("/").permitAll()
-			.antMatchers("/login").permitAll()
-			.antMatchers("/registration").permitAll()
-			.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest().authenticated()
-//		    .antMatchers("/user/**").hasAnyRole("USER")
+			.antMatchers("/", "/index", "/registration").permitAll()
+			.antMatchers("/admin/**").hasAuthority("ADMIN")
+		    .antMatchers("/user/**").hasAuthority("USER").anyRequest().authenticated() //this method anyRequest().authenticated() must be after all roles
 		.and().csrf().disable()
-			.formLogin().loginPage("/login").failureUrl("/login?error=true")
-			.defaultSuccessUrl("/admin/home").usernameParameter("email").passwordParameter("password")
+		// in class customSuccessHandler makes all mapping after authenticated. For simple request use  method (.defaultSuccessUrl("/admin/home"))
+		.formLogin().loginPage("/index").failureUrl("/index?error=true").successHandler(customSuccessHandler) 
+			.usernameParameter("email").passwordParameter("password")
 		.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+			.invalidateHttpSession(true).deleteCookies("JSESSIONID")  
 		.and()
 			.exceptionHandling().accessDeniedPage("/access-denied");
 	}
@@ -76,5 +84,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
 	}
+
 
 }

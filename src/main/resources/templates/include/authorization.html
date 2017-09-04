@@ -1,0 +1,35 @@
+<div th:fragment="registration" xmlns:th="http://www.w3.org/1999/xhtml">
+    <form th:action="@{/registration}" method="get">
+        <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
+    </form>
+
+    <div class="container">
+        <img th:src="@{/images/login-logo.jpg}" class="img-responsive center-block" width="200" height="200"
+             alt="Logo"/>
+        <form th:action="@{/index}" method="POST" class="form-signin">
+            <h3 class="form-signin-heading" th:text="Welcome"></h3>
+            <br/>
+
+            <input type="text" id="email" name="email" th:placeholder="Email"
+                   class="form-control"/> <br/>
+            <input type="password" th:placeholder="Password"
+                   id="password" name="password" class="form-control"/> <br/>
+
+            <div align="center" th:if="${param.error}">
+                <p style="font-size:20px; color: #FF1C19;">Email or Password invalid, please verify</p>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
+                    th:text="Login"></button>
+        </form>
+    </div>
+</div>
+
+
+<div th:fragment="user" xmlns:th="http://www.w3.org/1999/xhtml">
+    <span th:utext="${userName}"></span>
+    <p th:utext="${adminMessage}"></p>
+    <form th:action="@{/logout}" method="post"> <!-- this method was be get. I changed on post when read totorial spring configuration -->
+        <button class="btn btn-md btn-danger btn-block" name="registration" type="Submit">Logout</button>
+    </form>
+</div>
+

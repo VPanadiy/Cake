@@ -3,6 +3,7 @@ package com.Aleksandr.Cake.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +19,14 @@ import java.util.List;
 @Controller
 @ConfigurationProperties(prefix = "amazon")
 public class ReadingListController {
-	private ReadingListRepository readingListRepository;
+
+    private ReadingListRepository readingListRepository;
 	private final Logger logger = LoggerFactory.getLogger(ReadingListController.class);
 
-	private String associateId;
-	
-	public void setAssociateId(String associateId) {
+    @Value("${amazon.associateId}")
+	String associateId;
+
+    public void setAssociateId(String associateId) {
 		this.associateId = associateId;
 	}
 
@@ -38,23 +41,22 @@ public class ReadingListController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/{reader}", method = RequestMethod.GET)
+	@RequestMapping(value = "/index/{reader}", method = RequestMethod.GET)
 	public String readersBooks(@PathVariable("reader") String reader, Model model) {
 		List<Book> readingList = readingListRepository.findByReader(reader);
 		if (readingList != null) {
 			model.addAttribute("books", readingList);
 			model.addAttribute("reader", reader);
-			model.addAttribute("amazonID", associateId);
+			model.addAttribute("amazon", associateId);
 		}
 		return "readingList";
 	}
 
-	@RequestMapping(value = "/{reader}", method = RequestMethod.POST)
+	@RequestMapping(value = "/index/{reader}", method = RequestMethod.POST)
 	public String addToReadingList(@PathVariable("reader") String reader, Book book) {
 		book.setReader(reader);
-		// book.setId(4L);
 		System.out.println(book);
 		readingListRepository.save(book);
-		return "redirect:/{reader}";
+		return "redirect:/index/{reader}";
 	}
 }

@@ -1,6 +1,9 @@
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
+*.class
+/bin/
+*.gitignore
 
 ### STS ###
 .apt_generated
@@ -32,3 +35,6 @@ src/test/resources/
 .settings/
 bin/com/Aleksandr/Cake/.gradle/
 src/main/java/com/Aleksandr/Cake/.gradle/
+/classes/
+/gradle/
+/logs/

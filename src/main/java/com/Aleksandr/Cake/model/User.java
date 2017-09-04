@@ -99,4 +99,16 @@ public class User {
 		this.roles = roles;
 	}
 
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", email='" + email + '\'' +
+				", password=' Secret!!! '"  +
+				", name='" + name + '\'' +
+				", lastName='" + lastName + '\'' +
+				", active=" + active +
+				", roles=" + roles +
+				'}';
+	}
 }
