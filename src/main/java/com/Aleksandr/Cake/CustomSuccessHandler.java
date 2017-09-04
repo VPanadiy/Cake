@@ -63,10 +63,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
     }
      
     private boolean isUser(List<String> roles) {
-        if (roles.contains("USER")) {
-            return true;
-        }
-        return false;
+        return roles.contains("USER") ? true : false;
     }
  
     private boolean isAdmin(List<String> roles) {
