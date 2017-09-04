@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      th:with="lang=${#locale.language}" th:lang="${lang}">
+<head>
+    <title th:text="#{label.title}"></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+</head>
+<body>
+<p>This is page user</p>
+<div style="text-align: right;padding:5px;margin:5px 0px;background:#ccc;">
+    <a href="/user/home?lang=en" th:text="#{label.LanguageEN}"></a>
+    <a href="/user/home?lang=ua" th:text="#{label.LanguageUA}"></a>
+</div>
+
+
+<div lang="en" th:include="include/footer :: footer"></div>
+</body>
+</html>
