@@ -1,5 +1,7 @@
 package com.Aleksandr.Cake;
 
+import static com.Aleksandr.utils.CONST.*;
+
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -66,18 +68,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		LOGGER.info("-- Start class SecurityConfiguration with role!!");
 		http.authorizeRequests()
-			.antMatchers("/", "/index", "/registration").permitAll()
+			.antMatchers(URL_GENERAL, URL_INDEX, URL_REGISTRATION).permitAll()
 			.antMatchers("/admin/**").hasAuthority("ADMIN")
 		    .antMatchers("/user/**").hasAuthority("USER").anyRequest().authenticated() //this method anyRequest().authenticated() must be after all roles
 		.and().csrf().disable()
 		// in class customSuccessHandler makes all mapping after authenticated. For simple request use  method (.defaultSuccessUrl("/admin/home"))
-		.formLogin().loginPage("/index").failureUrl("/index?error=true").successHandler(customSuccessHandler) 
+		.formLogin().loginPage(URL_INDEX).failureUrl(URL_INDEX+"?error=true").successHandler(customSuccessHandler) 
 			.usernameParameter("email").passwordParameter("password")
 		.and()
-			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+			.logout().logoutRequestMatcher(new AntPathRequestMatcher(URL_LOGOUT)).logoutSuccessUrl(URL_GENERAL)
 			.invalidateHttpSession(true).deleteCookies("JSESSIONID")  
 		.and()
-			.exceptionHandling().accessDeniedPage("/access-denied");
+			.exceptionHandling().accessDeniedPage(URL_ACCESS_DENIED);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.Aleksandr.Cake.controller;
 
+import static com.Aleksandr.utils.CONST.*;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -22,7 +24,7 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+	@RequestMapping(value = { URL_GENERAL, URL_INDEX }, method = RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("index");
@@ -42,7 +44,7 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/registration", method = RequestMethod.GET)
+	@RequestMapping(value = URL_REGISTRATION, method = RequestMethod.GET)
 	public ModelAndView registration() {
 		ModelAndView modelAndView = new ModelAndView();
 		User user = new User();
@@ -51,7 +53,7 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	@RequestMapping(value = URL_REGISTRATION, method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		User userExists = userService.findUserByEmail(user.getEmail());
@@ -71,7 +73,7 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/admin/home", method = RequestMethod.GET)
+	@RequestMapping(value = URL_ADMIN_HOME, method = RequestMethod.GET)
 	public ModelAndView home() {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -85,7 +87,7 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/user/home", method = RequestMethod.GET)
+	@RequestMapping(value = URL_USER_HOME, method = RequestMethod.GET)
 	public ModelAndView userHome() {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

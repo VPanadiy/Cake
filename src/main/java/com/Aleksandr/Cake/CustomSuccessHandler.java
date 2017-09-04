@@ -1,5 +1,7 @@
 package com.Aleksandr.Cake;
 
+import static com.Aleksandr.utils.CONST.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -45,11 +47,11 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
         }
  
         if (isUser(roles)) {
-            url = "/user/home";
+            url = URL_USER_HOME;
         } else if (isAdmin(roles)) {
-            url = "/admin/home";
+            url = URL_ADMIN_HOME;
         } else {
-            url="/accessDenied";
+            url=URL_ACCESS_DENIED;
         }
  
         return url;
@@ -63,11 +65,11 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
     }
      
     private boolean isUser(List<String> roles) {
-        return roles.contains("USER") ? true : false;
+    	return roles.contains("USER") ? true : false;
     }
  
     private boolean isAdmin(List<String> roles) {
-        return roles.contains("ADMIN") ? true : false;
+         return roles.contains("ADMIN") ? true : false;
     }
   
 }
