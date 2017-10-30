@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.Aleksandr.Cake.model.Book;
 import com.Aleksandr.Cake.repository.ReadingListRepository;
 
+import static com.Aleksandr.utils.CONST.*;
+
 import java.util.List;
 
 @Controller
@@ -35,7 +37,7 @@ public class ReadingListController {
 		this.readingListRepository = readingListRepository;
 	}
 
-	@RequestMapping("/index")
+	@RequestMapping(URL_INDEX)
 	public String home() {
 		logger.info("Open the page index.jsp -- my logger");
 		return "index";
