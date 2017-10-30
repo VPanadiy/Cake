@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-      th:with="lang=${#locale.language}" th:lang="${lang}">
+<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
 <head>
     <title th:text="#{label.title}"></title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
@@ -10,8 +9,8 @@
 <body>
 <p>Cake</p>
 <div style="text-align: right;padding:5px;margin:5px 0px;background:#ccc;">
-    <a href="/index?lang=en" th:text="#{label.LanguageEN}"></a>
-    <a href="/index?lang=ua" th:text="#{label.LanguageUA}"></a>
+    <a href="/calendar?lang=en" th:text="#{label.LanguageEN}"></a>
+    <a href="/calendar?lang=ua" th:text="#{label.LanguageUA}"></a>
 </div>
 <div>
     <div lang="en" th:include="include/login :: form"></div>
@@ -26,7 +25,7 @@
     <a href="#" alt="Ingredients" th:text="#{label.Ingredients}"></a>
     <a href="/calendar" alt="Calendar" th:text="#{label.Calendar}"></a>
 </div>
-
+<p>calendar</p>
 <div lang="en" th:include="include/footer :: footer"></div>
 </body>
 </html>
