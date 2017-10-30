@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
@@ -24,10 +23,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         LOGGER.info("-- Initialization addResourceHandlers!!!");
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-
-//        registry.addResourceHandler("/*.js/**").addResourceLocations("/static/");
-//        registry.addResourceHandler("/*.css/**").addResourceLocations("/static/");
-//        registry.addResourceHandler("/*.images/**").addResourceLocations("/static/");
     }
 
     @Bean
@@ -38,6 +33,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
+    
     @Bean
     public CookieLocaleResolver localeResolver() {
         LOGGER.info("-- Initialization localeResolver in WebConfig!!!");
@@ -61,12 +57,5 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         LOGGER.info("-- Initialization addInterceptors in WebConfig!!!");
         registry.addInterceptor(localeChangeInterceptor());
     }
-//        @Bean
-//    public InternalResourceViewResolver getViewResolver() {
-//        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-//        viewResolver.setPrefix("/");
-//        viewResolver.setSuffix(".html");
-//            viewResolver.setContentType("text/html;charset=UTF-8");
-//        return viewResolver;
-//    }
+
 }

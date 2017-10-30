@@ -50,6 +50,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Value("${spring.queries.roles-query}")
 	private String rolesQuery;
 
+	@Autowired
+	CustomSuccessHandler customSuccessHandler;
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		LOGGER.info("Start class SecurityConfiguration!!!");
@@ -57,21 +60,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.dataSource(dataSource)
 				.passwordEncoder(bCryptPasswordEncoder);
 	}
-
+	
+    
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		LOGGER.info("Start class SecurityConfiguration with role!!");
+		LOGGER.info("-- Start class SecurityConfiguration with role!!");
 		http.authorizeRequests()
-			.antMatchers("/").permitAll()
-			.antMatchers("/login").permitAll()
-			.antMatchers("/registration").permitAll()
-			.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest().authenticated()
-		    .antMatchers("/user/**").hasAnyRole("USER")
+			.antMatchers("/", "/index", "/registration").permitAll()
+			.antMatchers("/admin/**").hasAuthority("ADMIN")
+		    .antMatchers("/user/**").hasAuthority("USER").anyRequest().authenticated() //this method anyRequest().authenticated() must be after all roles
 		.and().csrf().disable()
-			.formLogin().loginPage("/login").failureUrl("/login?error=true")
-			.defaultSuccessUrl("/admin/home").usernameParameter("email").passwordParameter("password")
+		// in class customSuccessHandler makes all mapping after authenticated. For simple request use  method (.defaultSuccessUrl("/admin/home"))
+		.formLogin().loginPage("/index").failureUrl("/index?error=true").successHandler(customSuccessHandler) 
+			.usernameParameter("email").passwordParameter("password")
 		.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+			.invalidateHttpSession(true).deleteCookies("JSESSIONID")  
 		.and()
 			.exceptionHandling().accessDeniedPage("/access-denied");
 	}
@@ -80,5 +84,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
 	}
+
 
 }
