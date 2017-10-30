@@ -43,7 +43,7 @@ public class ReadingListController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/index/{reader}", method = RequestMethod.GET)
+	@RequestMapping(value = URL_INDEX+"/{reader}", method = RequestMethod.GET)
 	public String readersBooks(@PathVariable("reader") String reader, Model model) {
 		List<Book> readingList = readingListRepository.findByReader(reader);
 		if (readingList != null) {
@@ -54,7 +54,7 @@ public class ReadingListController {
 		return "readingList";
 	}
 
-	@RequestMapping(value = "/index/{reader}", method = RequestMethod.POST)
+	@RequestMapping(value = URL_INDEX+"/{reader}", method = RequestMethod.POST)
 	public String addToReadingList(@PathVariable("reader") String reader, Book book) {
 		book.setReader(reader);
 		System.out.println(book);
