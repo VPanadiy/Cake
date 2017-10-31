@@ -4,6 +4,7 @@ package com.Aleksandr.Cake.controller;
 import java.math.BigDecimal;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -31,151 +32,155 @@ import static com.Aleksandr.utils.ViewURLs.*;
 
 @Controller
 //@RequestMapping(value = { MENU, DEFAULT_URL })
-//@SessionAttributes(value = { "product", "allCondimentsInShop", "shoppingCart" })
+@SessionAttributes(value = {"product", "allCondimentsInShop", "shoppingCart"})
 
 public class ProductMenuController {
 
-	@Autowired
-	private ProductService productService;
+    @Autowired
+    private ProductService productService;
 
-	@Autowired
-	private ProductCartService productCartService;
+    @Autowired
+    private ProductCartService productCartService;
 
     private final Logger LOGGER = LoggerFactory.getLogger(ProductMenuController.class);
 
-//	@ModelAttribute("shoppingCart")
-//	public void initializeShoppingCart(Model model) {
-//
-//		Map<Integer, TreeMap<Integer, Product>> shoppingCart = new HashMap<Integer, TreeMap<Integer, Product>>();
-//		model.addAttribute("shoppingCart", shoppingCart);
-//
-//	}
-//
-//	@RequestMapping(value = { ALL, DEFAULT_URL }, method = RequestMethod.GET)
-//	public String listAllProducts(Model model) {
-//
-//		model.addAttribute("products", productService.getAllProducts());
-//		return PRODUCT_LIST_VIEW;
-//
-//	}
+    @ModelAttribute("shoppingCart")
+    public void initializeShoppingCart(Model model) {
 
-    @RequestMapping(value = "/shoppingCart")
-    public ModelAndView shoppingCart() {
+        Map<Integer, TreeMap<Integer, Product>> shoppingCart = new HashMap<Integer, TreeMap<Integer, Product>>();
+        model.addAttribute("shoppingCart", shoppingCart);
 
-        LOGGER.info("-- open page shoppingCart");
-        ModelAndView model = new ModelAndView();
-        model.addObject("products", productService.getAllProducts());
-        model.setViewName("shoppingCart");
-        return model;
     }
 
-	@RequestMapping(value = CATEGORY, method = RequestMethod.GET)
-	public String listAllProductsByCategory(@PathVariable("category") String productCategory, Model model) {
+    @RequestMapping(value = {ALL, DEFAULT_URL}, method = RequestMethod.GET)
+    public String listAllProducts(Model model) {
+        LOGGER.info("-- method listAllProducts execute");
+        List<Product> product = productService.getAllProducts();
+        LOGGER.info("-- product" + product.get(0).toString());
+        model.addAttribute("products", productService.getAllProducts());
+        return PRODUCT_LIST_VIEW;
 
-		model.addAttribute("products", productService.getProductsByCategory(productCategory));
-		return PRODUCT_LIST_VIEW;
+    }
 
-	}
+//    @RequestMapping(value = "/shoppingCart")
+//    public ModelAndView shoppingCart() {
+//
+//        LOGGER.info("-- open page shoppingCart");
+//        ModelAndView model = new ModelAndView();
+//        List<Product> products = productService.getAllProducts();
+//        LOGGER.info("-- product" + products.get(0).toString());
+//        model.addObject("products", productService.getAllProducts());
+//        model.setViewName("shoppingCart");
+//        return model;
+//    }
 
-	@RequestMapping(value = PRODUCT_DETAIL, method = RequestMethod.GET)
-	public String getProductDetail(@RequestParam("productId") int productId, Model model) {
+    @RequestMapping(value = CATEGORY, method = RequestMethod.GET)
+    public String listAllProductsByCategory(@PathVariable("category") String productCategory, Model model) {
 
-		Map<Integer, Product> allCondimentsInShop = productService.getAllCondiments();
-		model.addAttribute("product", productService.getProductById(productId));
-		model.addAttribute("allCondimentsInShop", allCondimentsInShop);
-		return PRODUCT_DETAIL_VIEW;
-	}
+        model.addAttribute("products", productService.getProductsByCategory(productCategory));
+        return PRODUCT_LIST_VIEW;
 
-	@RequestMapping(value = PRODUCT_ADD_TO_CART, method = RequestMethod.GET)
-	public String addProductToCart(@ModelAttribute("product") Product product,
-			@ModelAttribute("shoppingCart") Map<Integer, TreeMap<Integer, Product>> shoppingCart) {
+    }
 
-		ShoppingCartData data = new ShoppingCartData.ShoppingCartDataBuilder(shoppingCart, product).build();
-		productCartService.addProductToShoppingCart(data);
+    @RequestMapping(value = PRODUCT_DETAIL, method = RequestMethod.GET)
+    public String getProductDetail(@RequestParam("productId") int productId, Model model) {
 
-		return PRODUCT_DETAIL_VIEW_REDIRECT + product.getId();
-	}
+        Map<Integer, Product> allCondimentsInShop = productService.getAllCondiments();
+        model.addAttribute("product", productService.getProductById(productId));
+        model.addAttribute("allCondimentsInShop", allCondimentsInShop);
+        return PRODUCT_DETAIL_VIEW;
+    }
 
-	@RequestMapping(value = PRODUCT_DELETE_FROM_CART, method = RequestMethod.GET)
-	public String deleteProductFromCart(@RequestParam("indexId") int productIndexIdInShoppingCart,
-			@ModelAttribute("product") Product product,
-			@ModelAttribute("shoppingCart") Map<Integer, TreeMap<Integer, Product>> shoppingCart) {
+    @RequestMapping(value = PRODUCT_ADD_TO_CART, method = RequestMethod.GET)
+    public String addProductToCart(@ModelAttribute("product") Product product,
+                                   @ModelAttribute("shoppingCart") Map<Integer, TreeMap<Integer, Product>> shoppingCart) {
 
-		ShoppingCartData data = new ShoppingCartData.ShoppingCartDataBuilder(shoppingCart, product)
-				.orderIndexId(productIndexIdInShoppingCart).build();
+        ShoppingCartData data = new ShoppingCartData.ShoppingCartDataBuilder(shoppingCart, product).build();
+        productCartService.addProductToShoppingCart(data);
 
-		productCartService.deleteProductFromShoppingCart(data);
+        return PRODUCT_DETAIL_VIEW_REDIRECT + product.getId();
+    }
 
-		return PRODUCT_DETAIL_VIEW_REDIRECT + product.getId();
-	}
+    @RequestMapping(value = PRODUCT_DELETE_FROM_CART, method = RequestMethod.GET)
+    public String deleteProductFromCart(@RequestParam("indexId") int productIndexIdInShoppingCart,
+                                        @ModelAttribute("product") Product product,
+                                        @ModelAttribute("shoppingCart") Map<Integer, TreeMap<Integer, Product>> shoppingCart) {
 
-	@RequestMapping(value = PRODUCT_DELETE_ALL_CART, method = RequestMethod.GET)
-	public String deleteAllProductFromCart(@ModelAttribute("product") Product product,
-			@ModelAttribute("shoppingCart") Map<Integer, TreeMap<Integer, Product>> shoppingCart) {
+        ShoppingCartData data = new ShoppingCartData.ShoppingCartDataBuilder(shoppingCart, product)
+                .orderIndexId(productIndexIdInShoppingCart).build();
 
-		ShoppingCartData data = new ShoppingCartData.ShoppingCartDataBuilder(shoppingCart, product).build();
-		productCartService.deleteAllProductFromShoppingCartByProductId(data);
+        productCartService.deleteProductFromShoppingCart(data);
 
-		return PRODUCT_DETAIL_VIEW_REDIRECT + product.getId();
-	}
+        return PRODUCT_DETAIL_VIEW_REDIRECT + product.getId();
+    }
 
-	@RequestMapping(value = PRODUCT_ADD_CONDIMENT, method = RequestMethod.GET)
-	public String addNewCondimentToProduct(@RequestParam("indexId") int orderIndexId,
-			@RequestParam("condimentId") int condimentId, @ModelAttribute("product") Product product,
-			@ModelAttribute("allCondimentsInShop") Map<Integer, Product> allCondimentsInShop,
-			@ModelAttribute("shoppingCart") Map<Integer, TreeMap<Integer, Product>> shoppingCart) {
+    @RequestMapping(value = PRODUCT_DELETE_ALL_CART, method = RequestMethod.GET)
+    public String deleteAllProductFromCart(@ModelAttribute("product") Product product,
+                                           @ModelAttribute("shoppingCart") Map<Integer, TreeMap<Integer, Product>> shoppingCart) {
 
-		ShoppingCartData data = new ShoppingCartData.ShoppingCartDataBuilder(shoppingCart, product)
-				.orderIndexId(orderIndexId).allCondimentsInShop(allCondimentsInShop).condimentId(condimentId).build();
+        ShoppingCartData data = new ShoppingCartData.ShoppingCartDataBuilder(shoppingCart, product).build();
+        productCartService.deleteAllProductFromShoppingCartByProductId(data);
 
-		productCartService.addCondimentToProductInShoppingCart(data);
+        return PRODUCT_DETAIL_VIEW_REDIRECT + product.getId();
+    }
 
-		return PRODUCT_DETAIL_VIEW_REDIRECT + product.getId();
-	}
+    @RequestMapping(value = PRODUCT_ADD_CONDIMENT, method = RequestMethod.GET)
+    public String addNewCondimentToProduct(@RequestParam("indexId") int orderIndexId,
+                                           @RequestParam("condimentId") int condimentId, @ModelAttribute("product") Product product,
+                                           @ModelAttribute("allCondimentsInShop") Map<Integer, Product> allCondimentsInShop,
+                                           @ModelAttribute("shoppingCart") Map<Integer, TreeMap<Integer, Product>> shoppingCart) {
 
-	@RequestMapping(value = PRODUCT_DELETE_CONDIMENT, method = RequestMethod.GET)
-	public String deleteCondimentFromProduct(@RequestParam("indexId") int orderIndexId,
-			@RequestParam("condimentId") int condimentId, @ModelAttribute("product") Product product,
-			@ModelAttribute("allCondimentsInShop") Map<Integer, Product> allCondimentsInShop,
-			@ModelAttribute("shoppingCart") Map<Integer, TreeMap<Integer, Product>> shoppingCart) {
+        ShoppingCartData data = new ShoppingCartData.ShoppingCartDataBuilder(shoppingCart, product)
+                .orderIndexId(orderIndexId).allCondimentsInShop(allCondimentsInShop).condimentId(condimentId).build();
 
-		ShoppingCartData data = new ShoppingCartData.ShoppingCartDataBuilder(shoppingCart, product)
-				.orderIndexId(orderIndexId).allCondimentsInShop(allCondimentsInShop).condimentId(condimentId).build();
+        productCartService.addCondimentToProductInShoppingCart(data);
 
-		productCartService.deleteCondimentFromProductInShoppingCart(data);
+        return PRODUCT_DETAIL_VIEW_REDIRECT + product.getId();
+    }
 
-		return PRODUCT_DETAIL_VIEW_REDIRECT + product.getId();
-	}
+    @RequestMapping(value = PRODUCT_DELETE_CONDIMENT, method = RequestMethod.GET)
+    public String deleteCondimentFromProduct(@RequestParam("indexId") int orderIndexId,
+                                             @RequestParam("condimentId") int condimentId, @ModelAttribute("product") Product product,
+                                             @ModelAttribute("allCondimentsInShop") Map<Integer, Product> allCondimentsInShop,
+                                             @ModelAttribute("shoppingCart") Map<Integer, TreeMap<Integer, Product>> shoppingCart) {
 
-	@RequestMapping(value = PRODUCT_SHOPPING_CART, method = RequestMethod.GET)
-	public String goToShoppingCart(@ModelAttribute("shoppingCart") Map<Integer, TreeMap<Integer, Product>> shoppingCart,
-			Model model, final RedirectAttributes redirectAttributes) {
+        ShoppingCartData data = new ShoppingCartData.ShoppingCartDataBuilder(shoppingCart, product)
+                .orderIndexId(orderIndexId).allCondimentsInShop(allCondimentsInShop).condimentId(condimentId).build();
 
-		TreeMap<Integer, BigDecimal> calculatedPrices = productCartService
-				.calculateProductsSumByIdInShoppingCart(shoppingCart);
+        productCartService.deleteCondimentFromProductInShoppingCart(data);
 
-		BigDecimal totalAll = productCartService.calculateProductsSumAllInShoppingCart(calculatedPrices);
+        return PRODUCT_DETAIL_VIEW_REDIRECT + product.getId();
+    }
 
-		Map<Integer, Product> products = new HashMap<Integer, Product>();
+    @RequestMapping(value = PRODUCT_SHOPPING_CART, method = RequestMethod.GET)
+    public String goToShoppingCart(@ModelAttribute("shoppingCart") Map<Integer, TreeMap<Integer, Product>> shoppingCart,
+                                   Model model, final RedirectAttributes redirectAttributes) {
 
-		for (Product product : productService.getAllProducts()) {
-			products.put(product.getId(), product);
-		}
+        TreeMap<Integer, BigDecimal> calculatedPrices = productCartService
+                .calculateProductsSumByIdInShoppingCart(shoppingCart);
 
-		model.addAttribute("products", products);
-		model.addAttribute("calculatedPrices", calculatedPrices);
-		model.addAttribute("totalAll", totalAll);
-		model.addAttribute("reducedPrice", productCartService.calculateDiscount(shoppingCart));
-		return PRODUCT_SHOPPING_CART_VIEW;
-	}
+        BigDecimal totalAll = productCartService.calculateProductsSumAllInShoppingCart(calculatedPrices);
 
-	@RequestMapping(value = ORDER_DELETE_FROM_CART, method = RequestMethod.GET)
-	public String deleteOrderFromCart(@RequestParam("productId") int productId,
-			@ModelAttribute("shoppingCart") Map<Integer, TreeMap<Integer, Product>> shoppingCart) {
+        Map<Integer, Product> products = new HashMap<Integer, Product>();
 
-		shoppingCart.remove(productId);
+        for (Product product : productService.getAllProducts()) {
+            products.put(product.getId(), product);
+        }
 
-		return PRODUCT_SHOPPING_CART_VIEW_REDIRECT;
-	}
+        model.addAttribute("products", products);
+        model.addAttribute("calculatedPrices", calculatedPrices);
+        model.addAttribute("totalAll", totalAll);
+        model.addAttribute("reducedPrice", productCartService.calculateDiscount(shoppingCart));
+        return PRODUCT_SHOPPING_CART_VIEW;
+    }
+
+    @RequestMapping(value = ORDER_DELETE_FROM_CART, method = RequestMethod.GET)
+    public String deleteOrderFromCart(@RequestParam("productId") int productId,
+                                      @ModelAttribute("shoppingCart") Map<Integer, TreeMap<Integer, Product>> shoppingCart) {
+
+        shoppingCart.remove(productId);
+
+        return PRODUCT_SHOPPING_CART_VIEW_REDIRECT;
+    }
 
 }
