@@ -60,9 +60,13 @@ public class ProductMenuController {
 //	}
 
     @RequestMapping(value = "/shoppingCart")
-    public String shoppingCart() {
+    public ModelAndView shoppingCart() {
+
         LOGGER.info("-- open page shoppingCart");
-        return "shoppingCart";
+        ModelAndView model = new ModelAndView();
+        model.addObject("products", productService.getAllProducts());
+        model.setViewName("shoppingCart");
+        return model;
     }
 
 	@RequestMapping(value = CATEGORY, method = RequestMethod.GET)
