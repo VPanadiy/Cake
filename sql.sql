@@ -60,3 +60,23 @@ CREATE TABLE user_role (
 );
 
 select * from user_role;
+
+CREATE TABLE schedule
+(
+  id SERIAL PRIMARY KEY,
+  title varchar(255) NOT NULL,
+  description TEXT      ,
+  name varchar(255) NOT NULL,
+  phone varchar(13),
+  date_order timestamp NOT NULL,
+  active int DEFAULT NULL
+);
+
+DROP TABLE schedule;
+
+INSERT INTO schedule (id, title, description, name, phone, date_order, active) VALUES (1, 'title1', 'description1', 'name1', '+380631112233', '2017-11-11 00:00:00', 0);
+INSERT INTO schedule (id, title, description, name, phone, date_order, active) VALUES (2, 'title2', 'description2', 'name2', '+380631112233', '2017-11-11 00:00:00', 0);
+INSERT INTO schedule (id, title, description, name, phone, date_order, active) VALUES (3, 'title3', 'description3', 'name3', '+380631112233', '2017-11-11 00:00:00', 1);
+INSERT INTO schedule (id, title, description, name, phone, date_order, active) VALUES (4, 'title3', 'description3', 'name3', '+380631112233', '2017-10-11 00:00:00', 1);
+
+select * from schedule;
