@@ -55,8 +55,6 @@ public class ProductMenuController {
     @RequestMapping(value = {ALL, DEFAULT_URL}, method = RequestMethod.GET)
     public String listAllProducts(Model model) {
         LOGGER.info("-- method listAllProducts execute");
-        List<Product> product = productService.getAllProducts();
-        LOGGER.info("-- product" + product.get(0).toString());
         model.addAttribute("products", productService.getAllProducts());
         return PRODUCT_LIST_VIEW;
 

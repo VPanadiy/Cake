@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 
-<!--<spring:url value="/menu" var="mainMenuURL" htmlEscape="true"/>-->
-<!--<spring:url value="/menu/product.detail?productId=" var="productDetailURL" htmlEscape="true"/>-->
-<!--<spring:url value="/product.add" var="adminMenu" htmlEscape="true"/>-->
-<!--<spring:url value="/order.list" var="orderList" htmlEscape="true"/>-->
-
 <html xmlns:th="http://www.thymeleaf.org"
       th:with="lang=${#locale.language}" th:lang="${lang}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
 
     <link href="../static/css/bootstrap.min.css"
           th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
@@ -20,12 +14,11 @@
 <section>
     <div class="jumbotron">
         <div class="container">
-            <!--<h1><spring:message code='product.shop.name'/></h1>-->
-            <!--<p><spring:message code='product.shop.description'/></p>-->
+            <h1>Product Shop Name</h1>
+            <p>Product shop description</p>
         </div>
     </div>
 </section>
-
 
 <div id="page-content-wrapper">
     <section class="container">
@@ -34,19 +27,13 @@
             <div class="col-md-6">
                 <ul class="nav nav-tabs">
                     <li class="">
-                        <a href="${mainMenuURL}/all">
-                            <!--<spring:message code='product.products.all'/>-->
-                        </a>
+                        <a th:href="@{/menu.all}">ALL</a>
                     </li>
                     <li>
-                        <a href="${mainMenuURL}/hot">
-                            <!--<spring:message code='product.hot.beverages'/>-->
-                        </a>
+                        <a th:href="@{/menu.hot}">HOT</a>
                     </li>
                     <li class="">
-                        <a href="${mainMenuURL}/cold">
-                            <!--<spring:message code='product.cold.beverages'/>-->
-                        </a>
+                        <a th:href="@{/menu.cold}">COLD</a>
                     </li>
                 </ul>
             </div>
@@ -60,18 +47,14 @@
 				<a href="?language=tr">
                     <img th:src="@{/images/Turkey.png}"/>
 					</a>
-
 				|
-
-				<a href="${adminMenu}">
+				<a th:href="@{/product.add}">
                     <img th:src="@{/images/admin.png}"/>
 				</a>
-
-				<a href="${orderList}">
+                |
+				<a th:href="@{/order.list}">
                     <img th:src="@{/images/order_icon.png}"/>
 				</a>
-
-
 				</span>
             </div>
         </div>
@@ -84,13 +67,11 @@
                             <div class="caption">
                                 <h3 th:text="${product.name}"></h3>
                                 <span th:text="${product.description}"></span>
-                                <!--<p><fmt:formatNumber pattern="#0.00" value="${product.price}"/></p>-->
+                                <span th:text="${product.price}"></span>
                                 <p>
-                                    <a
-                                            href="${productDetailURL}${product.id}"
+                                    <a th:href="@{/menu.product.detail(productId=${product.id})}"
                                             class="btn btn-primary">
                                         <span class="glyphicon-info-sign glyphicon"/></span>
-                                        <!--<spring:message code='product.details'/>-->
                                     </a>
                                 </p>
 
@@ -99,14 +80,12 @@
                     </div>
                 </dl>
 
-                <!--<c:if test="${empty products}">-->
-                <!--<h2><spring:message code='product.any.product.in.category'/>  </h2>-->
-                <!--</c:if>-->
+                <div th:if="${products.empty}">EMPTY PRODUCT LIST</div>
 
             </div>
         </div>
     </section>
 </div>
-</div>
+
 </body>
 </html>

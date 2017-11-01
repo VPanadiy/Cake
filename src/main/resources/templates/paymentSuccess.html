@@ -1,34 +1,21 @@
-<!--<%@ page language="java" contentType="text/html; charset=UTF-8"-->
-<!--pageEncoding="UTF-8"%>-->
-<!--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>-->
-<!--<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>-->
-<!--<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>-->
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}" th:lang="${lang}">
+<head>
+    <title>Title</title>
 
-<!--<spring:url value="/order.payment.confirm" var="orderPaymentConfirm" htmlEscape="true"/>-->
+<link href="../static/css/style.css"
+      th:href="@{/css/style.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div id="io-page-wrapper">
+    <div id="io-cont-lock"><img th:src="@{/images/payment/lock-blue.png}"/></div>
+    <div id="io-cont-logovisa"><img th:src="@{/images/payment/logo-visa.png}"/></div>
+    <div id="io-cont-logomastercard"><img th:src="@{/images/payment/logo-mastercard.png}"/></div>
+    <div id="io-cont-logoaexpress"><img th:src="@{/images/payment/logo-aexpress.png}"/></div>
+    <div class="io-clearbox"></div>
+    <p class="io-p-header001">Java Coffee Shop</p>
 
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-    <!--<meta charset="utf-8">-->
-    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
-    <!--<title><spring:message code='payment.title'/></title>-->
-    <!--<link rel="stylesheet" type="text/css" media="screen" href="<c:url value="/resources/css/payment/style.css" />" />-->
-    <!--<link rel="stylesheet" type="text/css" media="screen" href="<c:url value="/resources/css/payment/reset.css" />" />-->
-
-
-<!--</head>-->
-<!--<body>-->
-<!--<div id="io-page-wrapper">-->
-    <!--<div id="io-cont-lock">	<img src="<c:url value="/resources/images/payment/lock-blue.png"/>"></div>-->
-    <!--<div id="io-cont-logovisa"><img src="<c:url value="/resources/images/payment/logo-visa.png"/>"></div>-->
-    <!--<div id="io-cont-logomastercard"><img src="<c:url value="/resources/images/payment/logo-mastercard.png"/>"></div>-->
-    <!--<div id="io-cont-logoaexpress"><img src="<c:url value="/resources/images/payment/logo-aexpress.png"/>"></div>-->
-    <!--<div class="io-clearbox"></div>-->
-    <!--<p class="io-p-header001">Java Coffee Shop</p>-->
-
-
-    <!--<form action="${orderPaymentConfirm}" method="post" name="logoform">-->
+    <!--<form action="/order.payment.confirm" method="post" name="logoform">-->
 
 
         <!--<div id="io-formcont-kartno">-->
@@ -51,16 +38,16 @@
 
 
     <!--</form>-->
-    <!--<div class="io-sortpay">-->
-        <!--<img src="<c:url value="/resources/images/payment/visa.png"/>">-->
-        <!--<img src="<c:url value="/resources/images/payment/mastercard.png"/>">-->
-        <!--<img src="<c:url value="/resources/images/payment/americanex.png"/>">-->
-        <!--<img src="<c:url value="/resources/images/payment/unionpay.png"/>">-->
-        <!--<img src="<c:url value="/resources/images/payment/unionpay.png"/>">-->
-        <!--<img src="<c:url value="/resources/images/payment/maestro.png"/>">-->
 
-    <!--</div>-->
-<!--</div>&lt;!&ndash; io-page-wrapper &ndash;&gt;-->
+    <div class="io-sortpay">
+        <img th:src="@{/images/payment/visa.png}"/>
+        <img th:src="@{/images/payment/mastercard.png}"/>
+        <img th:src="@{/images/payment/americanex.png}"/>
+        <img th:src="@{/images/payment/unionpay.png}"/>
+        <img th:src="@{/images/payment/unionpay.png}"/>
+        <img th:src="@{/images/payment/maestro.png}"/>
+    </div>
+</div><!-- io-page-wrapper -->
 
-<!--</body>-->
-<!--</html-->
+</body>
+</html>
