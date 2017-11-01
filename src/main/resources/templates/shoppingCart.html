@@ -6,8 +6,23 @@
     <title>Title</title>
     <link href="../static/css/bootstrap.min.css"
           th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen"
+    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
 </head>
 <body>
+
+<section>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Cake</h1>
+        </div>
+    </div>
+</section>
+
 <section class="container">
     <div class="row">
         <dl th:each="prices : ${calculatedPrices}">
@@ -38,12 +53,12 @@
                                     <span class="label label-info">${prices.value}</span>
                                 </h4>
 
-                                <a href="${menuBack}?productId=${products[(prices.key).intValue()].id}"
+                                <a href="/menu/product.detail?productId=${products[(prices.key).intValue()].id}"
                                    class="btn btn-default btn-md">
                                     <span class="glyphicon-info-sign glyphicon"></span>
                                 </a>
 
-                                <a href="${orderDeleteFromCartURL}?productId=${products[(prices.key).intValue()].id} "
+                                <a href="/menu/order.delete.from.cart?productId=${products[(prices.key).intValue()].id} "
                                    class="btn btn-danger btn-md">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </a>
@@ -72,14 +87,14 @@
 
 
                             <!--<p th:case="${totalAll !=0 }">-->
-                            <!--<form action="${productPayment}" method="POST">-->
+                            <!--<form action="/order.payment" method="POST">-->
                                 <!--<input type="submit" value="<spring:message code='product.confirm'/> "-->
                                        <!--class="btn btn-success">-->
                                 <!--<input type="hidden" value="${reducedPrice}">-->
                             <!--</form>-->
                             <!--</p>-->
 
-                            <a href="${menuAllURL}" class="btn btn-default btn-md">
+                            <a href="/menu/all" class="btn btn-default btn-md">
                                 <span class="glyphicon-hand-left glyphicon"></span>
                             </a>
 

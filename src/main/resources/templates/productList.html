@@ -53,22 +53,22 @@
 
             <div class="col-md-6">
 				<span style="float:right">
-				<a href="?language=en" >
-					<img src="<c:url value="/resources/images/UK.png" />" />
+				<a href="?language=en">
+                    <img th:src="@{/images/UK.png}"/>
 				</a>
 				|
 				<a href="?language=tr">
-					<img src="<c:url value="/resources/images/Turkey.png" />" />
+                    <img th:src="@{/images/Turkey.png}"/>
 					</a>
 
 				|
 
 				<a href="${adminMenu}">
-					<img src="<c:url value="/resources/images/admin.png" />" />
+                    <img th:src="@{/images/admin.png}"/>
 				</a>
 
 				<a href="${orderList}">
-					<img src="<c:url value="/resources/images/order_icon.png" />" />
+                    <img th:src="@{/images/order_icon.png}"/>
 				</a>
 
 
@@ -89,7 +89,7 @@
                                     <a
                                             href="${productDetailURL}${product.id}"
                                             class="btn btn-primary">
-                                        <span class="glyphicon-info-sign glyphicon" /></span>
+                                        <span class="glyphicon-info-sign glyphicon"/></span>
                                         <!--<spring:message code='product.details'/>-->
                                     </a>
                                 </p>
@@ -100,7 +100,7 @@
                 </dl>
 
                 <!--<c:if test="${empty products}">-->
-                    <!--<h2><spring:message code='product.any.product.in.category'/>  </h2>-->
+                <!--<h2><spring:message code='product.any.product.in.category'/>  </h2>-->
                 <!--</c:if>-->
 
             </div>

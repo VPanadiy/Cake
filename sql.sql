@@ -27,7 +27,7 @@ INSERT INTO Reader (username, fullname, password) VALUES ('u1','user1', 'q');
 
 Select * from Reader;
 
-
+DROP TABLE role;
 
 CREATE TABLE role (
   role_id SERIAL PRIMARY KEY,
@@ -61,12 +61,14 @@ CREATE TABLE user_role (
 
 select * from user_role;
 
+DROP TABLE product;
+
 CREATE TABLE IF NOT EXISTS Product (
   id INTEGER PRIMARY KEY,
   name VARCHAR(50),
   description  VARCHAR(50),
   price NUMERIC(18,0),
-  isCondiment BOOLEAN,
+  is_condiment BOOLEAN,
   category  VARCHAR(50)
 );
 
@@ -79,3 +81,5 @@ insert into Product(id,name,description,price,is_condiment,category) values (5,'
 insert into Product(id,name,description,price,is_condiment,category) values (6,'Findik surubu','Best Findik',3.00,true,'other');
 insert into Product(id,name,description,price,is_condiment,category) values (7,'Cikolata sosu','Best Cikolata',5.00,true,'other');
 insert into Product(id,name,description,price,is_condiment,category) values (8,'Limon','Best Eksi Limon',2.00,true,'other');
+
+select * from product;
