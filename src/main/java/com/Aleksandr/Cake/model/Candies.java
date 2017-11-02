@@ -1,7 +1,5 @@
 package com.Aleksandr.Cake.model;
 
-import com.Aleksandr.Cake.model.enums.ProductType;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 

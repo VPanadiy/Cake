@@ -12,12 +12,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.Aleksandr.utils.CONST.URL_PRODUCT_LIST;
-import static com.Aleksandr.utils.ViewURLs.PRODUCT_LIST_VIEW;
+import static com.Aleksandr.utils.CONST.URL_PRODUCTS;
+import static com.Aleksandr.utils.ViewURLs.PRODUCTS_VIEW;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -39,7 +40,11 @@ public class ProductControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        mockMvc = MockMvcBuilders.standaloneSetup(productController).build();
+        InternalResourceViewResolver templateResolver = new InternalResourceViewResolver();
+        templateResolver.setPrefix("/static/templates/");
+        templateResolver.setSuffix(".html");
+
+        mockMvc = MockMvcBuilders.standaloneSetup(productController).setViewResolvers(templateResolver).build();
     }
 
     @Test
@@ -50,9 +55,9 @@ public class ProductControllerTest {
 
         when(productRepository.findAll()).thenReturn((List) products);
 
-        mockMvc.perform(get(URL_PRODUCT_LIST))
+        mockMvc.perform(get(URL_PRODUCTS))
                 .andExpect(status().isOk())
-                .andExpect(view().name(PRODUCT_LIST_VIEW))
+                .andExpect(view().name(PRODUCTS_VIEW))
                 .andExpect(model().attribute("products", hasSize(2)));
     }
 
@@ -72,9 +77,9 @@ public class ProductControllerTest {
 //    public void testNewProduct() throws Exception {
 //        verifyZeroInteractions(productRepository);
 //
-//        mockMvc.perform(get(PRODUCT_ADD))
+//        mockMvc.perform(get(URL_PRODUCTS))
 //                .andExpect(status().isOk())
-//                .andExpect(view().name("productList"))
-//                .andExpect(model().attribute("product", instanceOf(Product.class)));
+//                .andExpect(view().name(PRODUCTS_VIEW))
+//                .andExpect(model().attribute("products", instanceOf(AbstractProduct.class)));
 //    }
 }

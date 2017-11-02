@@ -11,6 +11,7 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'war'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
@@ -45,7 +46,7 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.2'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.2'
     compile group: 'org.apache.logging.log4j', name: 'log4j-jcl', version: '2.8.2'
-    testCompile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.8.2'
+//    testCompile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.8.2'
 
     // for security
     compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
