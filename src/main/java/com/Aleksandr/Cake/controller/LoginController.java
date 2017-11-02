@@ -24,7 +24,7 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = { URL_GENERAL, URL_INDEX }, method = RequestMethod.GET)
+	@RequestMapping(value = { URL_GENERAL, URL_INDEX}, method = RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("index");
