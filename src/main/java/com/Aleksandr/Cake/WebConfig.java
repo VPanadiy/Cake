@@ -6,13 +6,16 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
+@EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter {
     private final Logger LOGGER = LoggerFactory.getLogger(WebConfig.class);
     @Bean
@@ -59,9 +62,23 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(localeChangeInterceptor());
     }
 
-    @Bean
-    public HibernateJpaSessionFactoryBean sessionFactory() {
-        return new HibernateJpaSessionFactoryBean();
-    }
+//    @Bean
+//    public ViewResolver getViewResolver() {
+//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//        resolver.setPrefix("/WEB-INF/");
+//        resolver.setSuffix(".html");
+//        return resolver;
+//    }
+//
+//    @Override
+//    public void configureDefaultServletHandling(
+//            DefaultServletHandlerConfigurer configurer) {
+//        configurer.enable();
+//    }
+//
+//    @Bean
+//    public HibernateJpaSessionFactoryBean sessionFactory() {
+//        return new HibernateJpaSessionFactoryBean();
+//    }
 
 }

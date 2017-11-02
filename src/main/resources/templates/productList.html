@@ -1,91 +1,10 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org"
-      th:with="lang=${#locale.language}" th:lang="${lang}">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
-    <link href="../static/css/bootstrap.min.css"
-          th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
-    <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
 </head>
 <body>
-<section>
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Product Shop Name</h1>
-            <p>Product shop description</p>
-        </div>
-    </div>
-</section>
-
-<div id="page-content-wrapper">
-    <section class="container">
-
-        <div class="row">
-            <div class="col-md-6">
-                <ul class="nav nav-tabs">
-                    <li class="">
-                        <a th:href="@{/menu.all}">ALL</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/menu.hot}">HOT</a>
-                    </li>
-                    <li class="">
-                        <a th:href="@{/menu.cold}">COLD</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-md-6">
-				<span style="float:right">
-				<a href="?language=en">
-                    <img th:src="@{/images/UK.png}"/>
-				</a>
-				|
-				<a href="?language=tr">
-                    <img th:src="@{/images/Turkey.png}"/>
-					</a>
-				|
-				<a th:href="@{/product.add}">
-                    <img th:src="@{/images/admin.png}"/>
-				</a>
-                |
-				<a th:href="@{/order.list}">
-                    <img th:src="@{/images/order_icon.png}"/>
-				</a>
-				</span>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <dl th:each="product : ${products}">
-                    <div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
-                        <div class="thumbnail">
-                            <div class="caption">
-                                <h3 th:text="${product.name}"></h3>
-                                <span th:text="${product.description}"></span>
-                                <span th:text="${product.price}"></span>
-                                <p>
-                                    <a th:href="@{/menu.product.detail(productId=${product.id})}"
-                                            class="btn btn-primary">
-                                        <span class="glyphicon-info-sign glyphicon"/></span>
-                                    </a>
-                                </p>
-
-                            </div>
-                        </div>
-                    </div>
-                </dl>
-
-                <div th:if="${products.empty}">EMPTY PRODUCT LIST</div>
-
-            </div>
-        </div>
-    </section>
-</div>
-
+<a>sdfsdfsdf</a>
 </body>
 </html>

@@ -64,22 +64,12 @@ select * from user_role;
 DROP TABLE product;
 
 CREATE TABLE IF NOT EXISTS Product (
-  id INTEGER PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name VARCHAR(50),
   description  VARCHAR(50),
-  price NUMERIC(18,0),
-  is_condiment BOOLEAN,
-  category  VARCHAR(50)
+  price NUMERIC(9,2),
+  category  VARCHAR(50),
+  product_type VARCHAR(50)
 );
-
-insert into Product(id,name,description,price,is_condiment,category) values (1,'Latte','Best Latte',5.00,false,'hot');
-insert into Product(id,name,description,price,is_condiment,category) values (2,'Mocha','Best Mocha',6.00,false,'hot');
-insert into Product(id,name,description,price,is_condiment,category) values (3,'Cay','Best Cay',3.00,false,'hot');
-insert into Product(id,name,description,price,is_condiment,category) values (4,'Turk kahvesi','Best Turk kahvesi',5.00,false,'hot');
-
-insert into Product(id,name,description,price,is_condiment,category) values (5,'Sut','Best Süt',2.00,true,'other');
-insert into Product(id,name,description,price,is_condiment,category) values (6,'Findik surubu','Best Findik',3.00,true,'other');
-insert into Product(id,name,description,price,is_condiment,category) values (7,'Cikolata sosu','Best Cikolata',5.00,true,'other');
-insert into Product(id,name,description,price,is_condiment,category) values (8,'Limon','Best Eksi Limon',2.00,true,'other');
 
 select * from product;

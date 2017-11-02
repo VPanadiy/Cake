@@ -12,9 +12,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.Aleksandr.Cake.model.Book;
 import com.Aleksandr.Cake.repository.ReadingListRepository;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = CakeApplication.class)
+@WebAppConfiguration
 public class CakeApplicationTests {
 
 	@Mock
