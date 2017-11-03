@@ -9,5 +9,6 @@ public class CONST {
 	public static final String URL_LOGOUT = "/logout";
 	public static final String URL_ACCESS_DENIED = "/accessDenied";
 	public static final String URL_PRODUCTS = "/products";
+	public static final String URL_ADD_PRODUCTS = "/addProduct";
 
 }

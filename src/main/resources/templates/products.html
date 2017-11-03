@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}" th:lang="${lang}">
+<!-- HEADER -->
+<head th:lang="${lang}">
+    <title th:text="#{label.Our_products}"></title>
+    <!--/*/ <th:block th:include="include/headerinc :: head"></th:block> /*/-->
 </head>
+<!-- /HEADER -->
+<!-- MAIN SECTION -->
 <body>
-<a>sdfsdfsdf</a>
+    <!--/*/ <th:block th:include="include/header :: header"></th:block> /*/-->
+
+    <div th:if="${not #lists.isEmpty(products)}">
+        <table class="table table-striped">
+            <tr>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}">Product Id</td>
+                <td th:text="${product.name}">Product Name</td>
+                <td th:text="${product.description}">descirption</td>
+                <td th:text="${product.price}">price</td>
+                <td><a th:href="${'/product/show/' + product.id}">View</a></td>
+                <td><a th:href="${'/product/edit/' + product.id}">Edit</a></td>
+                <td><a th:href="${'/product/delete/' + product.id}">Delete</a></td>
+            </tr>
+        </table>
 </body>
+<!-- /MAIN SECTION -->
+<!-- FOOTER -->
+<!-- FOOTER -->
+<footer>
+
+</footer>
+<!-- /FOOTER -->
 </html>

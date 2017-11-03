@@ -1,4 +1,4 @@
-﻿CREATE TABLE Book
+CREATE TABLE Book
 (
   id SERIAL PRIMARY KEY,
   reader TEXT      NOT NULL,

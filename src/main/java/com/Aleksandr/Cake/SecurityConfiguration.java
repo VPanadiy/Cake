@@ -68,7 +68,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		LOGGER.info("-- Start class SecurityConfiguration with role!!");
 		http.authorizeRequests()
-			.antMatchers(URL_GENERAL, URL_INDEX, URL_REGISTRATION, "/calendar").permitAll()
+			.antMatchers(URL_GENERAL, URL_INDEX, URL_REGISTRATION, URL_PRODUCTS, "/calendar").permitAll()
 			.antMatchers("/admin/**").hasAuthority("ADMIN")
 		    .antMatchers("/user/**").hasAuthority("USER").anyRequest().authenticated() //this method anyRequest().authenticated() must be after all roles
 		.and().csrf().disable()
