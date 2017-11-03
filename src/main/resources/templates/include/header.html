@@ -3,8 +3,8 @@
       th:with="lang=${#locale.language}" th:lang="${lang}">
 <head th:lang="${lang}">
 
-    <link href="../../static/css/style.css"
-          th:href="@{/css/style.css}" rel="stylesheet" media="screen"/>
+    <link href="../../static/css/bootstrap.min.css"
+    th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
 
 </head>
 <body>
@@ -14,30 +14,44 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
+                    <a class="navbar-brand" href="#" th:href="@{/}" th:text="#{label.General}">General</a>
                     <ul class="nav navbar-nav">
-                        <li><a href="#" th:href="@{/products}">Products</a></li>
-                        <li><a href="#" th:href="@{/product/new}" sec:authorize="hasAuthority('ADMIN')">Create Product</a></li>
-                        <li><a href="#" th:href="@{/login}">Sign In</a></li>
+                        <li><a href="#" th:href="@{/products}" th:text="#{label.Our_products}">Our products</a></li>
+                        <li><a href="#" th:href="@{/addProduct}" th:text="#{label.Add_products}" sec:authorize="hasAuthority('ADMIN')">Add products</a></li>
+                        <li><a href="#" th:href="@{/}" th:text="#{label.Feedback}">Feedback</a></li>
+                        <li><a href="#" th:href="@{/}" th:text="#{label.Contact}">Contact</a></li>
+                        <li><a href="#" th:href="@{/}" th:text="#{label.Delivery}">Delivery</a></li>
+                        <li><a href="#" th:href="@{/}" th:text="#{label.Ingredients}">Ingredients</a></li>
+                        <li><a href="#" th:href="@{/calendar}" th:text="#{label.Calendar}">Calendar</a></li>
+
+                        <li>
+                            <div class="navbar-form navbar-right">
+
+                                <div sec:authorize="isAuthenticated()" style="display: inline-flex">
+                                    <a class="btn btn-success"th:href="@{/dashboard}" style="margin-right: 4px;" th:text="#{label.Account_page}">Account page</a>
+                                    <form class="form-horizontal" th:action="@{/logout}" method="post">
+                                        <a><input class="btn btn-warning" type="submit" th:value="#{label.logout}"/></a>
+                                    </form>
+                                </div>
+
+                                <div sec:authorize="isAnonymous()">
+                                    <a class="btn btn-success" th:href="@{/index}" th:text="#{label.login}">Login</a>
+                                    <a class="btn btn-primary" th:href="@{/registration}" th:text="#{label.registration}">Registration</a>
+                                </div>
+
+                            </div>
+                        </li>
+
+
+                        <li><a href="?lang=en"><img th:src="@{/images/English.png}"/></a></li>
+                        <li><a href="?lang=ru"><img th:src="@{/images/Russian.png}"/></a></li>
+                        <li><a href="?lang=ua"><img th:src="@{/images/Ukraine.png}"/></a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <div class="welcome">
-            <span sec:authorize="isAuthenticated()">Welcome <span sec:authentication="name"></span></span>
-        </div>
-        <div class="jumbotron">
-            <div class="row text-center">
-                <div class="">
-                    <h2>Spring Framework Guru</h2>
-
-                    <h3>Spring Boot Web App</h3>
-                </div>
-            </div>
-            <div class="row text-center">
-                <img src="../../static/images/MemoryHeader.png" width="400"
-                     th:src="@{/images/MemoryHeader.png}"/>
-            </div>
+            <span sec:authorize="isAuthenticated()" th:text="#{welcome}">Welcome <span sec:authentication="name"></span></span>
         </div>
     </div>
 </div>
