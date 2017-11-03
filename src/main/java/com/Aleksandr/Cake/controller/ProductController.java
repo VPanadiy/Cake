@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import static com.Aleksandr.utils.CONST.URL_ADD_PRODUCTS;
 import static com.Aleksandr.utils.CONST.URL_PRODUCTS;
 import static com.Aleksandr.utils.ViewURLs.PRODUCTS_VIEW;
 
@@ -25,7 +26,14 @@ public class ProductController {
 
     @RequestMapping(URL_PRODUCTS)
     public String productList(Model model) {
-        logger.info("Open the page product.html -- my logger");
+        logger.info("Open the page products.html -- my logger");
+        model.addAttribute("products", productRepository.findAll());
+        return PRODUCTS_VIEW;
+    }
+
+    @RequestMapping(URL_ADD_PRODUCTS)
+    public String addProduct(Model model) {
+        logger.info("Open the page addProduct.html -- my logger");
         model.addAttribute("products", productRepository.findAll());
         return PRODUCTS_VIEW;
     }
