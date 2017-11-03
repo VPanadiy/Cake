@@ -28,7 +28,7 @@
                             <div class="navbar-form navbar-right">
 
                                 <div sec:authorize="isAuthenticated()" style="display: inline-flex">
-                                    <a class="btn btn-success"th:href="@{/dashboard}" style="margin-right: 4px;" th:text="#{label.Account_page}">Account page</a>
+                                    <a class="btn btn-success" th:href="@{/index}" style="margin-right: 4px;" th:text="#{label.Account_page}">Account page</a>
                                     <form class="form-horizontal" th:action="@{/logout}" method="post">
                                         <a><input class="btn btn-warning" type="submit" th:value="#{label.logout}"/></a>
                                     </form>
