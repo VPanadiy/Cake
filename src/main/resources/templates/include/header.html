@@ -17,7 +17,7 @@
                     <a class="navbar-brand" href="#" th:href="@{/}" th:text="#{label.General}">General</a>
                     <ul class="nav navbar-nav">
                         <li><a href="#" th:href="@{/products}" th:text="#{label.Our_products}">Our products</a></li>
-                        <li><a href="#" th:href="@{/addProduct}" th:text="#{label.Add_products}" sec:authorize="hasAuthority('ADMIN')">Add products</a></li>
+                        <li><a href="#" th:href="@{/product/new}" th:text="#{label.Add_products}" sec:authorize="hasAuthority('ADMIN')">Add products</a></li>
                         <li><a href="#" th:href="@{/}" th:text="#{label.Feedback}">Feedback</a></li>
                         <li><a href="#" th:href="@{/}" th:text="#{label.Contact}">Contact</a></li>
                         <li><a href="#" th:href="@{/}" th:text="#{label.Delivery}">Delivery</a></li>

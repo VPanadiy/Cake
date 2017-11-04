@@ -67,7 +67,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		LOGGER.info("-- Start class SecurityConfiguration with role!!");
-		http.authorizeRequests()
+		http.authorizeRequests().antMatchers("/webjars/**").permitAll()
 			.antMatchers(URL_GENERAL, URL_INDEX, URL_REGISTRATION, URL_PRODUCTS, "/calendar").permitAll()
 			.antMatchers("/admin/**").hasAuthority("ADMIN")
 		    .antMatchers("/user/**").hasAuthority("USER").anyRequest().authenticated() //this method anyRequest().authenticated() must be after all roles
@@ -86,6 +86,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
 	}
-
 
 }

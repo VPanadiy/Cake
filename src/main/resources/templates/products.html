@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       th:with="lang=${#locale.language}" th:lang="${lang}">
 <!-- HEADER -->
 <head th:lang="${lang}">
@@ -9,34 +9,76 @@
 <!-- /HEADER -->
 <!-- MAIN SECTION -->
 <body>
+<div class="container">
     <!--/*/ <th:block th:include="include/header :: header"></th:block> /*/-->
 
     <div th:if="${not #lists.isEmpty(products)}">
+        <div class="col-sm-10"><h2>Product Listing</h2></div>
         <table class="table table-striped">
             <tr>
                 <th>Product Id</th>
                 <th>Product Name</th>
                 <th>Description</th>
                 <th>Price</th>
-                <th>View</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>Category</th>
+                <th>Weight/Count</th>
+                <th sec:authorize="hasAnyAuthority('USER','ADMIN')">View</th>
+                <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
+                <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
             </tr>
             <tr th:each="product : ${products}">
-                <td th:text="${product.id}">Product Id</td>
-                <td th:text="${product.name}">Product Name</td>
+                <td th:text="${product.id}"><a href="/product/${product.id}">Id</a></td>
+                <td th:text="${product.name}">Product Id</td>
                 <td th:text="${product.description}">descirption</td>
                 <td th:text="${product.price}">price</td>
-                <td><a th:href="${'/product/show/' + product.id}">View</a></td>
-                <td><a th:href="${'/product/edit/' + product.id}">Edit</a></td>
-                <td><a th:href="${'/product/delete/' + product.id}">Delete</a></td>
+                <td th:text="${product.category}">category</td>
+                <td>
+                    <div th:if="${product instanceof T(com.Aleksandr.Cake.model.Cake)}">
+                        <span th:text="${product.weight}">weight</span>
+                    </div>
+                    <div th:if="${product instanceof T(com.Aleksandr.Cake.model.Candies)}">
+                        <span th:text="${product.count}">count</span>
+                    </div>
+                </td>
+                <td sec:authorize="hasAnyAuthority('USER','ADMIN')"><a
+                        th:href="${'/product/show/' + product.id}">View</a></td>
+                <td sec:authorize="hasAuthority('ADMIN')"><a th:href="${'/product/edit/' + product.id}">Edit</a></td>
+                <td sec:authorize="hasAuthority('ADMIN')"><a th:href="${'/product/delete/' + product.id}">Delete</a>
+                </td>
             </tr>
         </table>
+
+    </div>
+</div>
+
 </body>
 <!-- /MAIN SECTION -->
 <!-- FOOTER -->
 <!-- FOOTER -->
 <footer>
+
+                        <!--EXAMPLES-->
+
+    <!--FOREACH-->
+    <!--<dl th:each="product : ${allProducts}"></dl>-->
+    <!--FOREACH-->
+
+    <!--IF-ELSE-->
+    <!-- IF ordersAmountByCustomerName = NULL -->
+    <!--<div th:if="${product == null}"></div>-->
+    <!-- ELSE -->
+    <!--<div th:unless="${product == null}"></div>-->
+    <!--/IF-ELSE-->
+
+    <!--Request example with pathVariable-->
+    <!--<a th:href="@{/menu/product.delete.from.cart(indexId=${orderIndexProduct.key})}"></a>-->
+    <!--/Request example with pathVariable-->
+
+    <!--Check list on null-->
+    <!--<div th:if="${products.empty}">EMPTY PRODUCT LIST</div>-->
+    <!--/Check list on null-->
+
+                        <!--/EXAMPLES-->
 
 </footer>
 <!-- /FOOTER -->

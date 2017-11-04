@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration
-//@EnableWebMvc
+@ComponentScan("com.Aleksandr.Cake.*")
 public class WebConfig extends WebMvcConfigurerAdapter {
     private final Logger LOGGER = LoggerFactory.getLogger(WebConfig.class);
     @Bean
@@ -25,6 +26,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 //    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 //        LOGGER.info("-- Initialization addResourceHandlers!!!");
 //        registry.addResourceHandler("/**").addResourceLocations("/resources/");
+//        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 //    }
 
     @Bean
@@ -60,14 +62,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(localeChangeInterceptor());
     }
 
-//    @Bean
-//    public ViewResolver getViewResolver() {
-//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-//        resolver.setPrefix("/WEB-INF/");
-//        resolver.setSuffix(".html");
-//        return resolver;
+//    @Bean(name = "viewResolver")
+//    public InternalResourceViewResolver getViewResolver() {
+//        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+//        viewResolver.setPrefix("/");
+//        viewResolver.setSuffix(".html");
+//        return viewResolver;
 //    }
-//
+
 //    @Override
 //    public void configureDefaultServletHandling(
 //            DefaultServletHandlerConfigurer configurer) {

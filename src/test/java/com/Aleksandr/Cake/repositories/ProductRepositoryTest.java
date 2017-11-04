@@ -29,7 +29,8 @@ public class ProductRepositoryTest {
     /* *************************************************************************/
     @Test
     public void testCRUDProduct() {
-        List<AbstractProduct> productList = new ArrayList<>(); //get current values from DB
+        List<AbstractProduct> productList = productRepository.findAll(); //get current values from DB
+        int countElementsOnListAtTheBeginning = productList.size();
 
         //setup cake
         AbstractCake cake = new Cake();
@@ -77,7 +78,7 @@ public class ProductRepositoryTest {
 
         //verify count of products in DB
         long productCount = productRepository.count();
-        assertEquals(productCount, 1);
+        assertEquals(productCount, countElementsOnListAtTheBeginning + 1);
 
         //get all products, list should only have one
         Iterable<AbstractProduct> products = productRepository.findAll();
@@ -88,12 +89,12 @@ public class ProductRepositoryTest {
             count++;
         }
 
-        assertEquals(count, 1);
+        assertEquals(count, countElementsOnListAtTheBeginning + 1);
 
         //delete setup cake
-        productRepository.delete(fetchedUpdatedProduct);
+        productRepository.delete(fetchedUpdatedProduct.getId());
 
-        List<AbstractProduct> updatedProductList = new ArrayList<>();
+        List<AbstractProduct> updatedProductList = productRepository.findAll();
 
         //compare lists
         assertEquals(productList, updatedProductList);

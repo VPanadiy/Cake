@@ -11,14 +11,8 @@ import java.math.BigDecimal;
 @DiscriminatorColumn(name = "PRODUCT_TYPE")
 public abstract class AbstractProduct implements ProductInterface {
 
-    @TableGenerator(
-            name = "PRODUCT_GEN",
-            table = "ID_GEN",
-            pkColumnName = "GEN_NAME",
-            valueColumnName = "GEN_VAL",
-            allocationSize = 1)
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "PRODUCT_GEN")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String description;
@@ -75,6 +69,30 @@ public abstract class AbstractProduct implements ProductInterface {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AbstractProduct that = (AbstractProduct) o;
+
+        if (!id.equals(that.id)) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (price != null ? !price.equals(that.price) : that.price != null) return false;
+        return category != null ? category.equals(that.category) : that.category == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (category != null ? category.hashCode() : 0);
+        return result;
     }
 
 }
