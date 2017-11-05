@@ -1,25 +1,26 @@
 package com.Aleksandr.Cake.controller;
 
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import java.util.function.Supplier;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.LongStream;
+
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,87 +37,142 @@ public class CalendarController {
 	private ScheduleRepository scheduleRepository;
 
 	@RequestMapping(value = "/calendar")
-	public String calendar() {
-		LOGGER.info("-- open page calendar");
-		return "calendar";
-	}
-
-	@ModelAttribute("schedules")
-	public Model days(Model model) {
+	public String calendar(Model model) {
+		LOGGER.info("-- Open page calendar");
 		List<Schedule> schedules = scheduleRepository.findAll();
-
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-
 		GregorianCalendar cal = new GregorianCalendar();
+		int month = cal.get(Calendar.MONTH);
+		GregorianCalendar startMonth = new GregorianCalendar(cal.get(Calendar.YEAR), month, 1);
 
-		Date date = new Date();
+		int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		LOGGER.info("-- The current date: " + cal.getTime() + ". This month: " + month + ". Days for month: "
+				+ daysInMonth + ". Start month day of week number: " + startMonth.get(Calendar.DAY_OF_WEEK));
+		LOGGER.info("-- The satrt current month: " + startMonth.getTime());
 
-		System.out.println(cal.get(Calendar.MONTH) + " month");
-		System.out.println(cal.get(Calendar.DAY_OF_MONTH) + " day for month");
-		System.out.println(cal.getTime());
-		System.out.println(cal.get(Calendar.DAY_OF_WEEK) + " day for week");
-		System.out.println(cal.get(Calendar.DAY_OF_WEEK_IN_MONTH) + " day of week in month");
+		Map<Integer, Map<Integer, List<Schedule>>> allMonth = new HashMap<>();
 
-		int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH) + 1;
-		System.out.println(daysInMonth + " days");
+		int firstDay = 8 - startMonth.get(Calendar.DAY_OF_WEEK); // get number day of week
 
-		GregorianCalendar startMonth = new GregorianCalendar(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), 1);
-		System.out.println(startMonth.get(Calendar.DAY_OF_WEEK) + " day for week start month");
-		System.out.println(startMonth.getTime());
-
-		Map<Integer, Map<Integer, List<Schedule>>> all = new HashMap<>();
-		int firstDay = 8 - startMonth.get(Calendar.DAY_OF_WEEK);
-		for (int i = 1; i < daysInMonth; i++) {
+		for (int i = 1; i < daysInMonth + 1; i++) {
 			if (i <= firstDay) {
-				createMap(all, i, 1, schedules);
+				createMap(allMonth, i, 1, schedules, cal);
 			} else if (i <= firstDay + 7) {
-				createMap(all, i, 2, schedules);
+				createMap(allMonth, i, 2, schedules, cal);
 			} else if (i <= firstDay + 14) {
-				createMap(all, i, 3, schedules);
+				createMap(allMonth, i, 3, schedules, cal);
 			} else if (i <= firstDay + 21) {
-				createMap(all, i, 4, schedules);
+				createMap(allMonth, i, 4, schedules, cal);
 			} else if (i <= firstDay + 28) {
-				createMap(all, i, 5, schedules);
+				createMap(allMonth, i, 5, schedules, cal);
 			} else {
-				createMap(all, i, 6, schedules);
+				createMap(allMonth, i, 6, schedules, cal);
 			}
-
 		}
 
+		Map<String, Integer> nameWeek = cal.getDisplayNames(Calendar.DAY_OF_WEEK, Calendar.SHORT_STANDALONE, Locale.US);
 		List<Integer> weeks = IntStream.range(1, 7).boxed().collect(Collectors.toList());
+		System.out.println(nameWeek);
+
+		model.addAttribute("previous", (month - 1));
+		model.addAttribute("next", (month + 1));
+		model.addAttribute("nameWeek", nameWeek);
 		model.addAttribute("weeks", weeks);
 		model.addAttribute("schedules", schedules);
 		model.addAttribute("isUser", true);
-		model.addAttribute("mapAll", all);
-		return model;
+		model.addAttribute("allMonth", allMonth);
+
+		return "calendar";
 	}
+	@RequestMapping(value = "/calendar", method = RequestMethod.POST)
+	public String save(@ModelAttribute("schedule") Schedule schedule,  BindingResult result) {
+		LOGGER.info("-- Save Schedule: " + schedule.toString()+ "......................................");
+		if (result.hasErrors()) {
+            return "form";
+        }
+		scheduleRepository.save(schedule);
+		return "redirect:/calendar";
+	}
+	@RequestMapping(value = "/calendar?month={month}", method = RequestMethod.GET)
+	public String calendar(@PathVariable("month") Integer month,  BindingResult userloginResult) {
+		LOGGER.info("-- Open with month: " + month + ".....................................................................");
+		return "/calendar?month={month}";
+	}
+	// need take only one month
+//	@ModelAttribute
+//	@RequestMapping(value = {"/calendar?&month={month}"}, method = RequestMethod.GET)
+//	public void days(Model model) {
+//		List<Schedule> schedules = scheduleRepository.findAll();
+//		LOGGER.info("--  + otherMonth + ---------------------------------------------");
+//		GregorianCalendar cal = new GregorianCalendar();
+//		int month = cal.get(Calendar.MONTH);
+//		GregorianCalendar startMonth = new GregorianCalendar(cal.get(Calendar.YEAR), month, 1);
+//
+//		int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+//		LOGGER.info("-- The current date: " + cal.getTime() + ". This month: " + month + ". Days for month: "
+//				+ daysInMonth + ". Start month day of week number: " + startMonth.get(Calendar.DAY_OF_WEEK));
+//		LOGGER.info("-- The satrt current month: " + startMonth.getTime());
+//
+//		Map<Integer, Map<Integer, List<Schedule>>> allMonth = new HashMap<>();
+//
+//		int firstDay = 8 - startMonth.get(Calendar.DAY_OF_WEEK); // get number day of week
+//
+//		for (int i = 1; i < daysInMonth + 1; i++) {
+//			if (i <= firstDay) {
+//				createMap(allMonth, i, 1, schedules, cal);
+//			} else if (i <= firstDay + 7) {
+//				createMap(allMonth, i, 2, schedules, cal);
+//			} else if (i <= firstDay + 14) {
+//				createMap(allMonth, i, 3, schedules, cal);
+//			} else if (i <= firstDay + 21) {
+//				createMap(allMonth, i, 4, schedules, cal);
+//			} else if (i <= firstDay + 28) {
+//				createMap(allMonth, i, 5, schedules, cal);
+//			} else {
+//				createMap(allMonth, i, 6, schedules, cal);
+//			}
+//		}
+//
+//		Map<String, Integer> nameWeek = cal.getDisplayNames(Calendar.DAY_OF_WEEK, Calendar.SHORT_STANDALONE, Locale.US);
+//		List<Integer> weeks = IntStream.range(1, 7).boxed().collect(Collectors.toList());
+//		System.out.println(nameWeek);
+//
+//		model.addAttribute("previous", (month - 1));
+//		model.addAttribute("next", (month + 1));
+//		model.addAttribute("nameWeek", nameWeek);
+//		model.addAttribute("weeks", weeks);
+//		model.addAttribute("schedules", schedules);
+//		model.addAttribute("isUser", true);
+//		model.addAttribute("allMonth", allMonth);
+//
+////		return model;
+////		return "redirect:calendar";
+//	}
 
-	private void createMap(Map<Integer, Map<Integer, List<Schedule>>> month, int day, int week, List<Schedule> schedules) {
-		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-		List<Schedule> thisDay = schedules.stream().filter(d -> d.getDate().getDate() == day)
-				.collect(Collectors.toList());
-			
-			if (thisDay.isEmpty()) {
-				Map<Integer, List<Schedule>> aboutThisDay;
-				if (month.get(week) == null) {
-					aboutThisDay = new HashMap<>();
-				} else {
-					aboutThisDay = month.get(week);
-				}
-				aboutThisDay.put(day, new ArrayList<>());
-				month.put(week, aboutThisDay);
-			} else {
-				Map<Integer, List<Schedule>> aboutThisDay;
-				if (month.get(week) == null) {
-					aboutThisDay = new HashMap<>();
-				} else {
-					aboutThisDay = month.get(week);
-				}
-				
-				aboutThisDay.put(day, thisDay);
-				month.put(week, aboutThisDay);
+	private void createMap(Map<Integer, Map<Integer, List<Schedule>>> schedulesMonth, int stepDay, int week,
+			List<Schedule> schedules, GregorianCalendar cal) {
+		int thisYear = cal.get(Calendar.YEAR);
+		int thisMonth = cal.get(Calendar.MONTH);
+
+		Calendar calendar = new GregorianCalendar();
+
+		List<Schedule> thisDay = schedules.stream().filter(d -> {
+			calendar.setTime(d.getDate_order());
+			if (calendar.get(Calendar.DAY_OF_MONTH) == stepDay && calendar.get(Calendar.MONTH) == thisMonth
+					&& calendar.get(Calendar.YEAR) == thisYear) {
+				return true;
 			}
+			return false;
+		}).collect(Collectors.toList());
 
-//		System.out.println(all + " size");
+		Map<Integer, List<Schedule>> aboutThisDay = (schedulesMonth.get(week) == null) ? new HashMap<>()
+				: schedulesMonth.get(week);
+
+		if (thisDay.isEmpty()) {
+			aboutThisDay.put(stepDay, new ArrayList<>());
+		} else {
+			aboutThisDay.put(stepDay, thisDay);
+		}
+
+		schedulesMonth.put(week, aboutThisDay);
 	}
 }
