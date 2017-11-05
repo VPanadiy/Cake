@@ -1,5 +1,7 @@
 package com.Aleksandr.Cake.model;
 
+import com.Aleksandr.Cake.model.enums.ProductCategory;
+
 import javax.persistence.MappedSuperclass;
 import java.math.BigDecimal;
 
@@ -11,8 +13,8 @@ public abstract class AbstractCandies extends AbstractProduct {
     public AbstractCandies() {
     }
 
-    public AbstractCandies(String name, String description, BigDecimal price, String category, long count) {
-        super(name, description, price, category);
+    public AbstractCandies(String name, String description, BigDecimal price, ProductCategory productCategory, long count) {
+        super(name, description, price, productCategory);
         this.count = count;
     }
 
@@ -23,4 +25,5 @@ public abstract class AbstractCandies extends AbstractProduct {
     public void setCount(long count) {
         this.count = count;
     }
+
 }

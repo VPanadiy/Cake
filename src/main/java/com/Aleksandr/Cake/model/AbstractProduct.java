@@ -1,5 +1,6 @@
 package com.Aleksandr.Cake.model;
 
+import com.Aleksandr.Cake.model.enums.ProductCategory;
 import com.Aleksandr.Cake.model.interfaces.ProductInterface;
 
 import javax.persistence.*;
@@ -17,16 +18,17 @@ public abstract class AbstractProduct implements ProductInterface {
     private String name;
     private String description;
     private BigDecimal price;
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private ProductCategory productCategory;
 
     public AbstractProduct() {
     }
 
-    public AbstractProduct(String name, String description, BigDecimal price, String category) {
+    public AbstractProduct(String name, String description, BigDecimal price, ProductCategory productCategory) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.category = category;
+        this.productCategory = productCategory;
     }
 
     public Long getId() {
@@ -63,12 +65,12 @@ public abstract class AbstractProduct implements ProductInterface {
         this.price = price;
     }
 
-    public String getCategory() {
-        return category;
+    public ProductCategory getProductCategory() {
+        return productCategory;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
     }
 
     @Override
@@ -78,20 +80,20 @@ public abstract class AbstractProduct implements ProductInterface {
 
         AbstractProduct that = (AbstractProduct) o;
 
-        if (!id.equals(that.id)) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
-        return category != null ? category.equals(that.category) : that.category == null;
+        return productCategory == that.productCategory;
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (category != null ? category.hashCode() : 0);
+        result = 31 * result + (productCategory != null ? productCategory.hashCode() : 0);
         return result;
     }
 

@@ -62,8 +62,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.dataSource(dataSource)
 				.passwordEncoder(bCryptPasswordEncoder);
 	}
-	
-    
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		LOGGER.info("-- Start class SecurityConfiguration with role!!");
@@ -73,11 +72,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		    .antMatchers("/user/**").hasAuthority("USER").anyRequest().authenticated() //this method anyRequest().authenticated() must be after all roles
 		.and().csrf().disable()
 		// in class customSuccessHandler makes all mapping after authenticated. For simple request use  method (.defaultSuccessUrl("/admin/home"))
-		.formLogin().loginPage(URL_INDEX).failureUrl(URL_INDEX+"?error=true").successHandler(customSuccessHandler) 
+		.formLogin().loginPage(URL_INDEX).failureUrl(URL_INDEX+"?error=true").successHandler(customSuccessHandler)
 			.usernameParameter("email").passwordParameter("password")
 		.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher(URL_LOGOUT)).logoutSuccessUrl(URL_GENERAL)
-			.invalidateHttpSession(true).deleteCookies("JSESSIONID")  
+			.invalidateHttpSession(true).deleteCookies("JSESSIONID")
 		.and()
 			.exceptionHandling().accessDeniedPage(URL_ACCESS_DENIED);
 	}

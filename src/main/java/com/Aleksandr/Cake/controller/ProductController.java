@@ -2,6 +2,8 @@ package com.Aleksandr.Cake.controller;
 
 import com.Aleksandr.Cake.model.AbstractProduct;
 import com.Aleksandr.Cake.model.Cake;
+import com.Aleksandr.Cake.model.Candies;
+import com.Aleksandr.Cake.model.enums.ProductCategory;
 import com.Aleksandr.Cake.repository.ProductRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,11 +48,21 @@ public class ProductController {
     @RequestMapping(NEW_PRODUCT_VIEW)
     public String newProduct(Model model) {
         logger.info("Method newProduct executed -- my logger");
-        model.addAttribute("product", new AbstractProduct() {});
+        model.addAttribute("product", new Cake());
         Cake cake = new Cake();
-        cake.setName("test");
-        cake.setPrice(new BigDecimal(123));
+        cake.setName("cake");
+        cake.setDescription("cake");
+        cake.setWeight(111);
+        cake.setProductCategory(ProductCategory.Cake);
+        cake.setPrice(new BigDecimal(111));
         productRepository.save(cake);
+        Candies candies = new Candies();
+        candies.setName("candies");
+        candies.setDescription("candies");
+        candies.setCount(222);
+        candies.setProductCategory(ProductCategory.Candies);
+        candies.setPrice(new BigDecimal(222));
+        productRepository.save(candies);
         return PRODUCT_FORM_VIEW;
     }
 

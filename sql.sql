@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS Product (
   name VARCHAR(50),
   description  VARCHAR(50),
   price NUMERIC(9,2),
-  category  VARCHAR(50),
+  productCategory  VARCHAR(50),
   product_type VARCHAR(50)
 );
 

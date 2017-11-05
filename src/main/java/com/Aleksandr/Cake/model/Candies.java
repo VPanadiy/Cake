@@ -1,6 +1,9 @@
 package com.Aleksandr.Cake.model;
 
-import javax.persistence.*;
+import com.Aleksandr.Cake.model.enums.ProductCategory;
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import java.math.BigDecimal;
 
 @Entity
@@ -10,7 +13,8 @@ public class Candies extends AbstractCandies {
     public Candies() {
     }
 
-    public Candies(String name, String description, BigDecimal price, String category, long count) {
-        super(name, description, price, category, count);
+    public Candies(String name, String description, BigDecimal price, ProductCategory productCategory, long count) {
+        super(name, description, price, productCategory, count);
     }
+
 }
