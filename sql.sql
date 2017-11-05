@@ -1,4 +1,4 @@
-﻿CREATE TABLE Book
+CREATE TABLE Book
 (
   id SERIAL PRIMARY KEY,
   reader TEXT      NOT NULL,
@@ -27,7 +27,7 @@ INSERT INTO Reader (username, fullname, password) VALUES ('u1','user1', 'q');
 
 Select * from Reader;
 
-
+DROP TABLE role;
 
 CREATE TABLE role (
   role_id SERIAL PRIMARY KEY,
@@ -60,6 +60,19 @@ CREATE TABLE user_role (
 );
 
 select * from user_role;
+
+DROP TABLE product;
+
+CREATE TABLE IF NOT EXISTS Product (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(50),
+  description  VARCHAR(50),
+  price NUMERIC(9,2),
+  productCategory  VARCHAR(50),
+  product_type VARCHAR(50)
+);
+
+select * from product;
 
 CREATE TABLE schedule
 (
