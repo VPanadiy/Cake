@@ -4,6 +4,7 @@ import com.Aleksandr.Cake.configuration.RepositoryConfiguration;
 import com.Aleksandr.Cake.model.AbstractCake;
 import com.Aleksandr.Cake.model.AbstractProduct;
 import com.Aleksandr.Cake.model.Cake;
+import com.Aleksandr.Cake.model.enums.ProductCategory;
 import com.Aleksandr.Cake.repository.ProductRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -29,14 +29,15 @@ public class ProductRepositoryTest {
     /* *************************************************************************/
     @Test
     public void testCRUDProduct() {
-        List<AbstractProduct> productList = new ArrayList<>(); //get current values from DB
+        List<AbstractProduct> productList = productRepository.findAll(); //get current values from DB
+        int countElementsOnListAtTheBeginning = productList.size();
 
         //setup cake
         AbstractCake cake = new Cake();
         cake.setName("Napoleon");
         cake.setDescription("Best wafer cake");
         cake.setPrice(new BigDecimal("360.95"));
-        cake.setCategory("Wafer");
+        cake.setProductCategory(ProductCategory.Cake);
         cake.setWeight(0.950);
 
         //save cake, verify has ID value after save
@@ -55,14 +56,14 @@ public class ProductRepositoryTest {
         assertEquals(cake.getName(), fetchedProduct.getName());
         assertEquals(cake.getDescription(), fetchedProduct.getDescription());
         assertEquals(cake.getPrice(), fetchedProduct.getPrice());
-        assertEquals(cake.getCategory(), fetchedProduct.getCategory());
+        assertEquals(cake.getProductCategory(), fetchedProduct.getProductCategory());
         assertEquals(cake.getWeight(), fetchedProduct.getWeight(), 0.0);
 
         //update description and save
         fetchedProduct.setName("Super testy napoleon");
         fetchedProduct.setDescription("More testy then regular napoleon");
         fetchedProduct.setPrice(new BigDecimal("499.99"));
-        fetchedProduct.setCategory("Sugar-Wafer");
+        fetchedProduct.setProductCategory(ProductCategory.Candies);
         fetchedProduct.setWeight(1.250);
         productRepository.save(fetchedProduct);
 
@@ -72,12 +73,12 @@ public class ProductRepositoryTest {
         assertEquals(fetchedProduct.getName(), fetchedUpdatedProduct.getName());
         assertEquals(fetchedProduct.getDescription(), fetchedUpdatedProduct.getDescription());
         assertEquals(fetchedProduct.getPrice(), fetchedUpdatedProduct.getPrice());
-        assertEquals(fetchedProduct.getCategory(), fetchedUpdatedProduct.getCategory());
+        assertEquals(fetchedProduct.getProductCategory(), fetchedUpdatedProduct.getProductCategory());
         assertEquals(fetchedProduct.getWeight(), fetchedUpdatedProduct.getWeight(), 0.0);
 
         //verify count of products in DB
         long productCount = productRepository.count();
-        assertEquals(productCount, 1);
+        assertEquals(productCount, countElementsOnListAtTheBeginning + 1);
 
         //get all products, list should only have one
         Iterable<AbstractProduct> products = productRepository.findAll();
@@ -88,12 +89,12 @@ public class ProductRepositoryTest {
             count++;
         }
 
-        assertEquals(count, 1);
+        assertEquals(count, countElementsOnListAtTheBeginning + 1);
 
         //delete setup cake
-        productRepository.delete(fetchedUpdatedProduct);
+        productRepository.delete(fetchedUpdatedProduct.getId());
 
-        List<AbstractProduct> updatedProductList = new ArrayList<>();
+        List<AbstractProduct> updatedProductList = productRepository.findAll();
 
         //compare lists
         assertEquals(productList, updatedProductList);

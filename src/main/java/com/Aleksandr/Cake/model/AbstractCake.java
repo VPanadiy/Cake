@@ -1,5 +1,7 @@
 package com.Aleksandr.Cake.model;
 
+import com.Aleksandr.Cake.model.enums.ProductCategory;
+
 import javax.persistence.MappedSuperclass;
 import java.math.BigDecimal;
 
@@ -11,8 +13,8 @@ public abstract class AbstractCake extends AbstractProduct {
     public AbstractCake() {
     }
 
-    public AbstractCake(String name, String description, BigDecimal price, String category, double weight) {
-        super(name, description, price, category);
+    public AbstractCake(String name, String description, BigDecimal price, ProductCategory productCategory, double weight) {
+        super(name, description, price, productCategory);
         this.weight = weight;
     }
 
@@ -23,4 +25,5 @@ public abstract class AbstractCake extends AbstractProduct {
     public void setWeight(double weight) {
         this.weight = weight;
     }
+
 }
