@@ -90,6 +90,10 @@ DROP TABLE schedule;
 INSERT INTO schedule (id, title, description, name, phone, date_order, active) VALUES (1, 'title1', 'description1', 'name1', '+380631112233', '2017-11-11 00:00:00', 0);
 INSERT INTO schedule (id, title, description, name, phone, date_order, active) VALUES (2, 'title2', 'description2', 'name2', '+380631112233', '2017-11-11 00:00:00', 0);
 INSERT INTO schedule (id, title, description, name, phone, date_order, active) VALUES (3, 'title3', 'description3', 'name3', '+380631112233', '2017-11-11 00:00:00', 1);
-INSERT INTO schedule (id, title, description, name, phone, date_order, active) VALUES (4, 'title3', 'description3', 'name3', '+380631112233', '2017-10-11 00:00:00', 1);
+INSERT INTO schedule (id, title, description, name, phone, date_order, active) VALUES (4, 'title4', 'description3', 'name3', '+380631112233', '2017-10-11 00:00:00', 1);
+INSERT INTO schedule (id, title, description, name, phone, date_order, active) VALUES (5, 'title5', 'description1', 'name1', '+380631112233', '2017-11-01 00:00:00', 0);
+INSERT INTO schedule (id, title, description, name, phone, date_order, active) VALUES (6, 'title6', 'description2', 'name2', '+380631112233', '2017-11-15 00:00:00', 0);
+INSERT INTO schedule (id, title, description, name, phone, date_order, active) VALUES (7, 'title7', 'description1', 'name1', '+380631112233', '2017-08-17 00:00:00', 0);
+INSERT INTO schedule (id, title, description, name, phone, date_order, active) VALUES (8, 'title8', 'description2', 'name2', '+380631112233', '2017-11-22 00:00:00', 0);
 
 select * from schedule;
