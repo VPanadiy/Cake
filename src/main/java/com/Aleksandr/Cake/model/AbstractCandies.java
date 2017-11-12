@@ -6,7 +6,7 @@ import javax.persistence.MappedSuperclass;
 import java.math.BigDecimal;
 
 @MappedSuperclass
-public abstract class AbstractCandies extends AbstractProduct {
+public abstract class AbstractCandies<T extends AbstractCandies<?>> extends AbstractProduct<T> {
 
     private long count;
 

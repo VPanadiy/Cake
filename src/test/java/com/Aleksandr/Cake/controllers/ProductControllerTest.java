@@ -4,12 +4,13 @@ import com.Aleksandr.Cake.controller.ProductController;
 import com.Aleksandr.Cake.model.AbstractProduct;
 import com.Aleksandr.Cake.model.Cake;
 import com.Aleksandr.Cake.model.Candies;
-import com.Aleksandr.Cake.repository.ProductRepository;
+import com.Aleksandr.Cake.repository.ProductBaseRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -29,7 +30,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ProductControllerTest {
 
     @Mock
-    private ProductRepository productRepository;
+    @Qualifier("productBaseRepository")
+    private ProductBaseRepository<AbstractProduct<?>> productBaseRepository;
 
     @InjectMocks
     private ProductController productController;
@@ -49,11 +51,11 @@ public class ProductControllerTest {
 
     @Test
     public void testList() throws Exception {
-        List<AbstractProduct> products = new ArrayList<>();
+        List<AbstractProduct<?>> products = new ArrayList<>();
         products.add(new Cake());
         products.add(new Candies());
 
-        when(productRepository.findAll()).thenReturn((List) products);
+        when(productBaseRepository.findAll()).thenReturn(products);
 
         mockMvc.perform(get(URL_PRODUCTS))
                 .andExpect(status().isOk())
@@ -65,7 +67,7 @@ public class ProductControllerTest {
 //    public void testShow() throws Exception {
 //        Integer id=1;
 //
-//        when(productRepository.getProductById(id)).thenReturn(new Product());
+//        when(productBaseRepository.getProductById(id)).thenReturn(new Product());
 //
 //        mockMvc.perform(get(PRODUCT_DETAIL_VIEW))
 //                .andExpect(status().isOk())
@@ -75,7 +77,7 @@ public class ProductControllerTest {
 //
 //    @Test
 //    public void testNewProduct() throws Exception {
-//        verifyZeroInteractions(productRepository);
+//        verifyZeroInteractions(productBaseRepository);
 //
 //        mockMvc.perform(get(URL_PRODUCTS))
 //                .andExpect(status().isOk())

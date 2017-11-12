@@ -5,10 +5,12 @@ import com.Aleksandr.Cake.model.AbstractCake;
 import com.Aleksandr.Cake.model.AbstractProduct;
 import com.Aleksandr.Cake.model.Cake;
 import com.Aleksandr.Cake.model.enums.ProductCategory;
-import com.Aleksandr.Cake.repository.ProductRepository;
+import com.Aleksandr.Cake.repository.CakeBaseRepository;
+import com.Aleksandr.Cake.repository.ProductBaseRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -19,17 +21,22 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = {RepositoryConfiguration.class})
-public class ProductRepositoryTest {
+public class ProductBaseRepositoryTest {
 
     @Autowired
-    private ProductRepository productRepository;
+    @Qualifier("productBaseRepository")
+    private ProductBaseRepository<AbstractProduct<?>> productBaseRepository;
+
+    @Autowired
+    @Qualifier("cakeBaseRepository")
+    private CakeBaseRepository<AbstractCake<?>> cakeBaseRepository;
 
     /* *************************************************************************/
     /* CAUTION: DO NOT RUN THIS TEST ON PRODUCTION. THIS TEST WORK WITH REAL DB*/
     /* *************************************************************************/
     @Test
     public void testCRUDProduct() {
-        List<AbstractProduct> productList = productRepository.findAll(); //get current values from DB
+        List<AbstractProduct<?>> productList = productBaseRepository.findAll(); //get current values from DB
         int countElementsOnListAtTheBeginning = productList.size();
 
         //setup cake
@@ -42,11 +49,11 @@ public class ProductRepositoryTest {
 
         //save cake, verify has ID value after save
         assertNull(cake.getId()); //null before save
-        productRepository.save(cake);
+        cakeBaseRepository.save(cake);
         assertNotNull(cake.getId()); //not null after save
 
         //fetch from DB
-        AbstractCake fetchedProduct = (Cake) productRepository.findOne(cake.getId());
+        AbstractCake fetchedProduct = (Cake) productBaseRepository.findOne(cake.getId());
 
         //should not be null
         assertNotNull(fetchedProduct);
@@ -65,10 +72,10 @@ public class ProductRepositoryTest {
         fetchedProduct.setPrice(new BigDecimal("499.99"));
         fetchedProduct.setProductCategory(ProductCategory.Candies);
         fetchedProduct.setWeight(1.250);
-        productRepository.save(fetchedProduct);
+        cakeBaseRepository.save(fetchedProduct);
 
         //get from DB, should be updated
-        AbstractCake fetchedUpdatedProduct = (Cake) productRepository.findOne(fetchedProduct.getId());
+        AbstractCake fetchedUpdatedProduct = (Cake) productBaseRepository.findOne(fetchedProduct.getId());
         assertEquals(fetchedProduct.getId(), fetchedUpdatedProduct.getId());
         assertEquals(fetchedProduct.getName(), fetchedUpdatedProduct.getName());
         assertEquals(fetchedProduct.getDescription(), fetchedUpdatedProduct.getDescription());
@@ -77,11 +84,11 @@ public class ProductRepositoryTest {
         assertEquals(fetchedProduct.getWeight(), fetchedUpdatedProduct.getWeight(), 0.0);
 
         //verify count of products in DB
-        long productCount = productRepository.count();
+        long productCount = productBaseRepository.count();
         assertEquals(productCount, countElementsOnListAtTheBeginning + 1);
 
         //get all products, list should only have one
-        Iterable<AbstractProduct> products = productRepository.findAll();
+        Iterable<AbstractProduct<?>> products = productBaseRepository.findAll();
 
         int count = 0;
 
@@ -92,9 +99,9 @@ public class ProductRepositoryTest {
         assertEquals(count, countElementsOnListAtTheBeginning + 1);
 
         //delete setup cake
-        productRepository.delete(fetchedUpdatedProduct.getId());
+        productBaseRepository.delete(fetchedUpdatedProduct.getId());
 
-        List<AbstractProduct> updatedProductList = productRepository.findAll();
+        List<AbstractProduct<?>> updatedProductList = productBaseRepository.findAll();
 
         //compare lists
         assertEquals(productList, updatedProductList);

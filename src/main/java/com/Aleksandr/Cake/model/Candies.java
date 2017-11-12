@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 @Entity
 @DiscriminatorValue(value = "Candies")
-public class Candies extends AbstractCandies {
+public class Candies extends AbstractCandies<Candies> {
 
     public Candies() {
     }

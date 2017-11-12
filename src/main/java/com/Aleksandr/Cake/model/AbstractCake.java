@@ -6,7 +6,7 @@ import javax.persistence.MappedSuperclass;
 import java.math.BigDecimal;
 
 @MappedSuperclass
-public abstract class AbstractCake extends AbstractProduct {
+public abstract class AbstractCake<T extends AbstractCake<?>> extends AbstractProduct<T> {
 
     private double weight;
 

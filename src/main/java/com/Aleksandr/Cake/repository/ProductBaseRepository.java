@@ -4,7 +4,8 @@ import com.Aleksandr.Cake.model.AbstractProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository("cakeRepository")
-public interface ProductRepository extends JpaRepository<AbstractProduct, Long> {
+@Repository("productBaseRepository")
+public interface ProductBaseRepository<T extends AbstractProduct<?>> extends JpaRepository<T, Long> {
 
 }
+

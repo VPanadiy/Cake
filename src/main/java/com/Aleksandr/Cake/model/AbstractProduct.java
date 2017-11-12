@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @Table(name = "PRODUCT")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "PRODUCT_TYPE")
-public abstract class AbstractProduct implements ProductInterface {
+public abstract class AbstractProduct<T extends AbstractProduct> implements ProductInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

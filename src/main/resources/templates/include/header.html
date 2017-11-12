@@ -51,7 +51,7 @@
             </div>
         </nav>
         <div class="welcome">
-            <span sec:authorize="isAuthenticated()" th:text="#{welcome}">Welcome <span sec:authentication="name"></span></span>
+            <span sec:authorize="isAuthenticated()" th:text="#{welcome}">Welcome</span> <span sec:authentication="name"></span>
         </div>
     </div>
 </div>
