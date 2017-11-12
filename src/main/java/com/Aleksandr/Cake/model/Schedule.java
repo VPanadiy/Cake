@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "schedule")
 public class Schedule {
@@ -30,11 +32,28 @@ public class Schedule {
 	@Column(name = "phone")
 	private String phone;
 	
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	@Column(name = "date_order")
-	private Date date;
+	private Date date_order;
 	
 	@Column(name = "active")
 	private int active;
+	
+	public Date getDate_order() {
+		return date_order;
+	}
+
+	public void setDate_order(Date date_order) {
+		this.date_order = date_order;
+	}
+
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
 
 	public long getId() {
 		return id;
@@ -76,20 +95,12 @@ public class Schedule {
 		this.phone = phone;
 	}
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + active;
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((date_order == null) ? 0 : date_order.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -107,10 +118,10 @@ public class Schedule {
 		Schedule other = (Schedule) obj;
 		if (active != other.active)
 			return false;
-		if (date == null) {
-			if (other.date != null)
+		if (date_order == null) {
+			if (other.date_order != null)
 				return false;
-		} else if (!date.equals(other.date))
+		} else if (!date_order.equals(other.date_order))
 			return false;
 		if (id != other.id)
 			return false;
@@ -125,6 +136,12 @@ public class Schedule {
 		} else if (!title.equals(other.title))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Schedule [id=" + id + ", title=" + title + ", description=" + description + ", name=" + name
+				+ ", phone=" + phone + ", date=" + date_order + ", active=" + active + "]";
 	}
 	
 	
