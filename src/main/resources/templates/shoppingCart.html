@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}" th:lang="${lang}">
+<!-- HEADER -->
+<head th:lang="${lang}">
+    <title>Shopping Cart</title>
+    <!--/*/ <th:block th:include="include/headerinc :: head"></th:block> /*/-->
+</head>
+<!-- /HEADER -->
+<!-- MAIN SECTION -->
+<body>
+<div class="container">
+
+    <!--/*/ <th:block th:include="include/header :: header"></th:block> /*/-->
+
+    <h2>Hello Flow :)</h2>
+
+    <form id="proceed" action="#" th:action="${flowExecutionUrl}" method="post">
+
+        <input type="hidden" name="_eventId" value="activate" />
+        <input type="submit" value="Proceed" />
+
+    </form>
+
+    <form action="#" th:action="${flowExecutionUrl}" method="post">
+
+        <input type="hidden" name="_eventId" value="cancel" />
+        <input type="submit" value="Cancel" />
+
+    </form>
+
+</div>
+
+</body>
+<!-- /MAIN SECTION -->
+</html>

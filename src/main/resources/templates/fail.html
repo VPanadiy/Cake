@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:with="lang=${#locale.language}" th:lang="${lang}">
+<!-- HEADER -->
+<head th:lang="${lang}">
+    <title>Fail page</title>
+    <!--/*/ <th:block th:include="include/headerinc :: head"></th:block> /*/-->
+</head>
+<!-- /HEADER -->
+<!-- MAIN SECTION -->
+<body>
+<div class="container">
+
+    <!--/*/ <th:block th:include="include/header :: header"></th:block> /*/-->
+    <h2>Activation Failed</h2>
+
+</div>
+
+</body>
+<!-- /MAIN SECTION -->
+</html>
