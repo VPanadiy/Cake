@@ -13,6 +13,8 @@
 
     <!--/*/ <th:block th:include="include/header :: header"></th:block> /*/-->
 
+    <span th:text="${flashProduct}"></span><span th:text="${flashProductMessage}"></span>
+
     <div th:if="${not #lists.isEmpty(products)}">
 
         <div class="col-sm-10"><h2>Product Listing</h2></div>
@@ -26,6 +28,7 @@
                 <th>Category</th>
                 <th>Weight/Count</th>
                 <th sec:authorize="hasAnyAuthority('USER','ADMIN')">View</th>
+                <th>Add</th>
                 <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
                 <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
             </tr>
@@ -43,8 +46,14 @@
                 </td>
                 <td sec:authorize="hasAnyAuthority('USER','ADMIN')"><a
                         th:href="${'/product/show/' + product.id}">View</a></td>
-                <td sec:authorize="hasAuthority('ADMIN')"><a th:href="${'/product/edit/' + product.id}">Edit</a>
+                <td>
+                    <form action="#" th:action="@{/AddProductToShoppingCart}" method="POST">
+                        <input type="hidden" th:name="productId" th:value="${product.id}"/>
+                        <input type="number" th:name="productCounter" th:value="1"/>
+                        <input type="submit" value="Add to ShoppingCart"/>
+                    </form>
                 </td>
+                <td sec:authorize="hasAuthority('ADMIN')"><a th:href="${'/product/edit/' + product.id}">Edit</a>
                 <td sec:authorize="hasAuthority('ADMIN')"><a th:href="${'/product/delete/' + product.id}">Delete</a>
                 </td>
             </tr>

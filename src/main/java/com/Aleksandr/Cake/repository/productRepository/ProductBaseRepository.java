@@ -1,4 +1,4 @@
-package com.Aleksandr.Cake.repository;
+package com.Aleksandr.Cake.repository.productRepository;
 
 import com.Aleksandr.Cake.model.AbstractProduct;
 import org.springframework.data.jpa.repository.JpaRepository;

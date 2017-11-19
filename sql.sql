@@ -69,10 +69,39 @@ CREATE TABLE IF NOT EXISTS Product (
   description  VARCHAR(50),
   price NUMERIC(9,2),
   productCategory  VARCHAR(50),
-  product_type VARCHAR(50)
+  weight DOUBLE PRECISION DEFAULT 0,
+  count BIGINT DEFAULT 0,
+  product_type VARCHAR(50),
+  image_data bytea
 );
 
 select * from product;
+
+DROP TABLE Orders;
+
+CREATE TABLE Orders
+(
+  order_id SERIAL PRIMARY KEY,
+  order_date DATE,
+  user_id INT,
+  price REAL,
+  is_open BOOLEAN DEFAULT TRUE
+);
+
+select * from Orders;
+
+DROP TABLE order_details;
+
+CREATE TABLE order_details
+(
+  id SERIAL,
+  order_id BIGINT REFERENCES Orders (order_id),
+  product_id BIGINT,
+  count INT,
+  payment BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+select * from order_details;
 
 CREATE TABLE schedule
 (

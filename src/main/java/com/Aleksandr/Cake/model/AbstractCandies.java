@@ -13,8 +13,8 @@ public abstract class AbstractCandies<T extends AbstractCandies<?>> extends Abst
     public AbstractCandies() {
     }
 
-    public AbstractCandies(String name, String description, BigDecimal price, ProductCategory productCategory, long count) {
-        super(name, description, price, productCategory);
+    public AbstractCandies(String name, String description, BigDecimal price, ProductCategory productCategory, byte[] imageData, long count) {
+        super(name, description, price, productCategory, imageData);
         this.count = count;
     }
 

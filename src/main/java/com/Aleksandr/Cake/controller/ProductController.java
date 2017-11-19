@@ -2,20 +2,33 @@ package com.Aleksandr.Cake.controller;
 
 import com.Aleksandr.Cake.model.*;
 import com.Aleksandr.Cake.model.enums.ProductCategory;
-import com.Aleksandr.Cake.repository.CakeBaseRepository;
-import com.Aleksandr.Cake.repository.CandiesBaseRepository;
-import com.Aleksandr.Cake.repository.ProductBaseRepository;
+import com.Aleksandr.Cake.repository.OrderDetailsRepository;
+import com.Aleksandr.Cake.repository.OrdersRepository;
+import com.Aleksandr.Cake.repository.productRepository.CakeBaseRepository;
+import com.Aleksandr.Cake.repository.productRepository.CandiesBaseRepository;
+import com.Aleksandr.Cake.repository.productRepository.ProductBaseRepository;
+import com.Aleksandr.Cake.serviceSecurity.UserService;
+import com.Aleksandr.Cake.services.OrdersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
 
 import static com.Aleksandr.utils.CONST.URL_PRODUCTS;
 import static com.Aleksandr.utils.ViewURLs.*;
@@ -35,11 +48,33 @@ public class ProductController {
     @Qualifier("candiesBaseRepository")
     private CandiesBaseRepository<AbstractCandies<?>> candiesBaseRepository;
 
+    @Autowired
+    @Qualifier("ordersRepository")
+    private OrdersRepository ordersRepository;
+
+    @Autowired
+    @Qualifier("orderDetailsRepository")
+    private OrderDetailsRepository orderDetailsRepository;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private OrdersService ordersService;
+
     private final Logger logger = LoggerFactory.getLogger(ReadingListController.class);
 
     @RequestMapping(value = URL_PRODUCTS, method = RequestMethod.GET)
-    public String productList(Model model) {
+    public String productList(Model model, HttpServletRequest request) {
         logger.info("Method productList executed -- my logger");
+
+        Map<String, ?> map = RequestContextUtils.getInputFlashMap(request);
+        if (map != null) {
+            logger.info("Method productList Redirect! -- my logger");
+        } else {
+            logger.info("Method productList Update! -- my logger");
+        }
+
         model.addAttribute("products", productBaseRepository.findAll());
         return PRODUCTS_VIEW;
     }
@@ -91,4 +126,64 @@ public class ProductController {
         return PRODUCTS_REDIRECT_VIEW;
     }
 
+    @RequestMapping(value = "/AddProductToShoppingCart", method = RequestMethod.POST)
+    @ResponseBody
+    public RedirectView addProductToShoppingCart(@ModelAttribute(value = "productId") Long id, @ModelAttribute("productCounter") Integer count, RedirectAttributes redirectAttributes) {
+        logger.info("Method addProductToShoppingCart executed -- my logger");
+        AbstractProduct product = productBaseRepository.findOne(id);
+        logger.info("Product found!  Product id: " + product.getId());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        logger.info("User found! User id: " + user.getId());
+        List<Orders> findOrdersList = ordersService.findOrderByUser(user);
+        logger.info("FindOrdersList size = " + findOrdersList.size());
+
+        Orders orders = new Orders();
+        boolean  isNewOrder = false;
+        if (findOrdersList.size() == 0) {
+            isNewOrder = true;
+            BigDecimal cost = product.getPrice().multiply(new BigDecimal(count));
+            logger.info("Counted cost = : " + cost);
+
+            orders.setOrderDate(new Date());
+            orders.setUserId(user);
+            orders.setPrice(cost);
+            orders.setOpen(true);
+            ordersRepository.save(orders);
+        } else {
+
+            Date lastOrderDate = findOrdersList.stream().map(Orders::getOrderDate).max(Date::compareTo).get();
+            logger.info("LastOrderDate = " + lastOrderDate);
+
+            for (Orders order : findOrdersList) {
+                if (order.getOrderDate() == lastOrderDate && order.isOpen()) {
+                    orders = order;
+                    logger.info("Last open order id: " + orders.getOrderId());
+                }
+            }
+
+        }
+
+        OrderDetails orderDetails = new OrderDetails();
+        orderDetails.setOrder(orders);
+        orderDetails.setAbstractProduct(product);
+        orderDetails.setCount(count);
+        orderDetails.setPayment(false);
+        orderDetailsRepository.save(orderDetails);
+
+        if (orders.getPrice().compareTo(BigDecimal.ZERO) != 0 && !isNewOrder){
+            BigDecimal newProductCost = product.getPrice().multiply(new BigDecimal(count));
+            orders.setPrice(orders.getPrice().add(newProductCost));
+            logger.info("Counted cost updated to = : " + newProductCost);
+            ordersRepository.save(orders);
+        }
+
+        RedirectView redirectView = new RedirectView(PRODUCTS_REDIRECT_VIEW);
+        redirectView.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+
+        redirectAttributes.addFlashAttribute("flashProduct", orderDetails.getAbstractProduct().getName());
+        redirectAttributes.addFlashAttribute("flashProductMessage", " added to shopping cart!");
+
+        return redirectView;
+    }
 }

@@ -1,4 +1,4 @@
-package com.Aleksandr.Cake.repository;
+package com.Aleksandr.Cake.repository.productRepository;
 
 import com.Aleksandr.Cake.model.AbstractCandies;
 import org.springframework.stereotype.Repository;

@@ -13,8 +13,8 @@ public abstract class AbstractCake<T extends AbstractCake<?>> extends AbstractPr
     public AbstractCake() {
     }
 
-    public AbstractCake(String name, String description, BigDecimal price, ProductCategory productCategory, double weight) {
-        super(name, description, price, productCategory);
+    public AbstractCake(String name, String description, BigDecimal price, ProductCategory productCategory, byte[] imageData, double weight) {
+        super(name, description, price, productCategory, imageData);
         this.weight = weight;
     }
 

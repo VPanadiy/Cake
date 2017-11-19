@@ -20,15 +20,17 @@ public abstract class AbstractProduct<T extends AbstractProduct> implements Prod
     private BigDecimal price;
     @Enumerated(EnumType.STRING)
     private ProductCategory productCategory;
+    private byte[] imageData;
 
     public AbstractProduct() {
     }
 
-    public AbstractProduct(String name, String description, BigDecimal price, ProductCategory productCategory) {
+    public AbstractProduct(String name, String description, BigDecimal price, ProductCategory productCategory, byte[] imageData) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.productCategory = productCategory;
+        this.imageData = imageData;
     }
 
     public Long getId() {
@@ -71,6 +73,14 @@ public abstract class AbstractProduct<T extends AbstractProduct> implements Prod
 
     public void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
+    }
+
+    public byte[] getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
     }
 
     @Override

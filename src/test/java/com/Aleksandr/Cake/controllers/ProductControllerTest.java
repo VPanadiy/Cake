@@ -4,7 +4,7 @@ import com.Aleksandr.Cake.controller.ProductController;
 import com.Aleksandr.Cake.model.AbstractProduct;
 import com.Aleksandr.Cake.model.Cake;
 import com.Aleksandr.Cake.model.Candies;
-import com.Aleksandr.Cake.repository.ProductBaseRepository;
+import com.Aleksandr.Cake.repository.productRepository.ProductBaseRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
