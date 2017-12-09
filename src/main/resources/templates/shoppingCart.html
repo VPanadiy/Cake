@@ -29,6 +29,37 @@
 
     </form>
 
+    <table class="table table-striped">
+        <tr>
+            <th>Order Id</th>
+            <th>Order Date</th>
+            <th>User Id</th>
+            <th>Price</th>
+            <th>Status</th>
+        </tr>
+
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.orderId}">Order Id</td>
+            <td th:text="${order.orderDate}">Order Date</td>
+            <td th:text="${order.userId}">User Id</td>
+            <td th:text="${order.price}">Price</td>
+            <td th:text="${order.open}">Status</td>
+        </tr>
+    </table>
+
+
+    <form class="form-inline">
+        <div class="form-group">
+            <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+            <div class="input-group">
+                <div class="input-group-addon">$</div>
+                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                <div class="input-group-addon">.00</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Transfer cash</button>
+    </form>
+
 </div>
 
 </body>

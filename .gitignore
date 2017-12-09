@@ -11,6 +11,9 @@
 .springBeans
 
 ### IntelliJ IDEA ###
+gradlew
+gradlew.bat
+.gitignore
 .idea
 *.iws
 *.iml

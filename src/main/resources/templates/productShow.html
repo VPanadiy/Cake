@@ -12,28 +12,74 @@
 <div class="container">
     <!--/*/ <th:block th:include="include/header :: header"></th:block> /*/-->
 
-        <div class="form-group">
-            <div class="col-sm-10"><h2>Product Details</h2></div>
+    <div class="form-group">
+        <div class="col-sm-10"><h2>Product Details</h2></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Product Id:</label>
+        <div class="col-sm-10">
+            <p class="form-control-static" th:text="${product.id}">Product Id</p></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Description:</label>
+        <div class="col-sm-10">
+            <p class="form-control-static" th:text="${product.description}">description</p>
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Product Id:</label>
-            <div class="col-sm-10">
-                <p class="form-control-static" th:text="${product.id}">Product Id</p></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Price:</label>
+        <div class="col-sm-10">
+            <p class="form-control-static" th:text="${product.price}">Priceaddd</p>
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Description:</label>
-            <div class="col-sm-10">
-                <p class="form-control-static" th:text="${product.description}">description</p>
-            </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Image:</label>
+        <div th:if="${product.imageData != null}">
+            <img style="border: solid black 1px" width="100px" height="100px"
+                 th:src="@{'data:image/jpg;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(product.imageData)}}"/>
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Price:</label>
-            <div class="col-sm-10">
-                <p class="form-control-static" th:text="${product.price}">Priceaddd</p>
-            </div>
-        </div>
+    </div>
 
 </div>
+
+<div class="container text-center">
+    <div class="row">
+
+        <div class="col-sm-7">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default text-left">
+                        <div class="panel-body">
+                            <p contenteditable="true">Status: Feeling Blue</p>
+                            <button type="button" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-thumbs-up"></span> Like
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="well">
+                        <p>John</p>
+                        <img th:src="@{/images/defaultImage.png}" class="img-circle" height="55" width="55" alt="Avatar">
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="well">
+                        <p>Just Forgot that I had to mention something about someone to someone about how I forgot
+                            something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
 
 </body>
 <!-- /MAIN SECTION -->

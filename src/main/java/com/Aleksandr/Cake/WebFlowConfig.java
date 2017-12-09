@@ -20,7 +20,8 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
     @Bean
     public FlowDefinitionRegistry flowRegistry() {
         return getFlowDefinitionRegistryBuilder(flowBuilderServices())
-                .addFlowLocation("classpath:/flows/shoppingCart-flow.xml", "shoppingCartFlow")
+                .setBasePath("classpath:/flows/")
+                .addFlowLocationPattern("*.xml")
                 .build();
     }
 

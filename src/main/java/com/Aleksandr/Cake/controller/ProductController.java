@@ -13,17 +13,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.EnumSet;
@@ -62,7 +65,7 @@ public class ProductController {
     @Autowired
     private OrdersService ordersService;
 
-    private final Logger logger = LoggerFactory.getLogger(ReadingListController.class);
+    private final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @RequestMapping(value = URL_PRODUCTS, method = RequestMethod.GET)
     public String productList(Model model, HttpServletRequest request) {
@@ -104,17 +107,19 @@ public class ProductController {
     }
 
     @RequestMapping(value = PRODUCT_CAKE_VIEW, method = RequestMethod.POST)
-    public String saveCake(Cake cake) {
+    public String saveCake(Cake cake, @ModelAttribute("file") MultipartFile file) throws IOException {
         logger.info("Method saveCake executed -- my logger");
         cake.setProductCategory(ProductCategory.Cake);
+        cake.setImageData(file.getBytes());
         cakeBaseRepository.save(cake);
         return PRODUCT_REDIRECT_VIEW + cake.getId();
     }
 
     @RequestMapping(value = PRODUCT_CANDIES_VIEW, method = RequestMethod.POST)
-    public String saveCandies(Candies candies) {
+    public String saveCandies(Candies candies, @ModelAttribute("file") MultipartFile file) throws IOException {
         logger.info("Method saveCandies executed -- my logger");
         candies.setProductCategory(ProductCategory.Candies);
+        candies.setImageData(file.getBytes());
         candiesBaseRepository.save(candies);
         return PRODUCT_REDIRECT_VIEW + candies.getId();
     }
@@ -127,8 +132,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/AddProductToShoppingCart", method = RequestMethod.POST)
-    @ResponseBody
-    public RedirectView addProductToShoppingCart(@ModelAttribute(value = "productId") Long id, @ModelAttribute("productCounter") Integer count, RedirectAttributes redirectAttributes) {
+    public String addProductToShoppingCart(@ModelAttribute(value = "productId") Long id, @ModelAttribute("productCounter") Integer count, RedirectAttributes redirectAttributes) {
         logger.info("Method addProductToShoppingCart executed -- my logger");
         AbstractProduct product = productBaseRepository.findOne(id);
         logger.info("Product found!  Product id: " + product.getId());
@@ -139,7 +143,7 @@ public class ProductController {
         logger.info("FindOrdersList size = " + findOrdersList.size());
 
         Orders orders = new Orders();
-        boolean  isNewOrder = false;
+        boolean isNewOrder = false;
         if (findOrdersList.size() == 0) {
             isNewOrder = true;
             BigDecimal cost = product.getPrice().multiply(new BigDecimal(count));
@@ -171,19 +175,24 @@ public class ProductController {
         orderDetails.setPayment(false);
         orderDetailsRepository.save(orderDetails);
 
-        if (orders.getPrice().compareTo(BigDecimal.ZERO) != 0 && !isNewOrder){
+        if (orders.getPrice().compareTo(BigDecimal.ZERO) != 0 && !isNewOrder) {
             BigDecimal newProductCost = product.getPrice().multiply(new BigDecimal(count));
             orders.setPrice(orders.getPrice().add(newProductCost));
             logger.info("Counted cost updated to = : " + newProductCost);
             ordersRepository.save(orders);
         }
 
-        RedirectView redirectView = new RedirectView(PRODUCTS_REDIRECT_VIEW);
-        redirectView.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-
         redirectAttributes.addFlashAttribute("flashProduct", orderDetails.getAbstractProduct().getName());
         redirectAttributes.addFlashAttribute("flashProductMessage", " added to shopping cart!");
 
-        return redirectView;
+        return PRODUCTS_REDIRECT_VIEW;
     }
+
+    @RequestMapping("/shoppingCart")
+    public String shoppingCart(Model model) {
+        logger.info("Method shoppingCart executed -- my logger");
+        model.addAttribute("orders", ordersRepository.findAll());
+        return "shoppingCart";
+    }
+
 }

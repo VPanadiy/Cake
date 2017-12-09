@@ -3,8 +3,7 @@
       th:with="lang=${#locale.language}" th:lang="${lang}">
 <head th:lang="${lang}">
 
-    <link href="../../static/css/bootstrap.min.css"
-    th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <!--/*/ <th:block th:include="include/headerinc :: head"></th:block> /*/-->
 
 </head>
 <body>
@@ -23,6 +22,7 @@
                         <li><a href="#" th:href="@{/}" th:text="#{label.Delivery}">Delivery</a></li>
                         <li><a href="#" th:href="@{/}" th:text="#{label.Ingredients}">Ingredients</a></li>
                         <li><a href="#" th:href="@{/calendar}" th:text="#{label.Calendar}">Calendar</a></li>
+                        <li><a href="#" th:href="@{/shoppingCart}" th:text="#{label.ShoppingCart}">ShoppingCart</a></li>
 
                         <li>
                             <div class="navbar-form navbar-right">
