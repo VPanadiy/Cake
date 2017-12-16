@@ -1,5 +1,6 @@
 package com.Aleksandr.Cake.controller;
 
+import com.Aleksandr.Cake.controller.wrapper.PageWrapper;
 import com.Aleksandr.Cake.model.*;
 import com.Aleksandr.Cake.model.enums.ProductCategory;
 import com.Aleksandr.Cake.repository.OrderDetailsRepository;
@@ -13,6 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -70,7 +73,7 @@ public class ProductController {
     private final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @RequestMapping(value = URL_PRODUCTS, method = RequestMethod.GET)
-    public String productList(Model model, HttpServletRequest request) {
+    public String productList(Model model, Pageable pageable, HttpServletRequest request) {
         logger.info("Method productList executed -- my logger");
 
         Map<String, ?> map = RequestContextUtils.getInputFlashMap(request);
@@ -80,7 +83,11 @@ public class ProductController {
             logger.info("Method productList Update! -- my logger");
         }
 
-        model.addAttribute("products", productBaseRepository.findAll());
+        Page<AbstractProduct<?>> productPage = productBaseRepository.findAll(pageable);
+        PageWrapper<AbstractProduct<?>> page = new PageWrapper<>(productPage, "/products");
+
+        model.addAttribute("products", page.getContent());
+        model.addAttribute("page", page);
         return PRODUCTS_VIEW;
     }
 
