@@ -9,8 +9,10 @@
         <transition on="cancel" to="fail"/>
     </view-state>
 
-    <view-state id="success"/>
+    <view-state id="success" view="success">
+        <secured attributes="ROLE_USER, ROLE_ADMIN" match="any" />
+    </view-state>
 
-    <view-state id="fail"/>
+    <view-state id="fail" view="fail"/>
 
 </flow>

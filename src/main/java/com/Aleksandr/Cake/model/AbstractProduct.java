@@ -2,8 +2,10 @@ package com.Aleksandr.Cake.model;
 
 import com.Aleksandr.Cake.model.enums.ProductCategory;
 import com.Aleksandr.Cake.model.interfaces.ProductInterface;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
@@ -15,11 +17,22 @@ public abstract class AbstractProduct<T extends AbstractProduct> implements Prod
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(name = "name")
+    @NotEmpty(message = "*Please provide a name for this product")
     private String name;
+
+    @Column(name = "description")
+    @NotEmpty(message = "*Please provide a description for this product")
     private String description;
+
+    @Column(name = "price")
+    @NotNull(message = "*Please provide product price")
     private BigDecimal price;
+
     @Enumerated(EnumType.STRING)
     private ProductCategory productCategory;
+
     private byte[] imageData;
 
     public AbstractProduct() {

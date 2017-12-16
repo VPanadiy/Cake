@@ -17,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -101,27 +103,65 @@ public class ProductController {
     @RequestMapping(EDIT_PRODUCT_BY_ID_VIEW)
     public String editProduct(@PathVariable Long id, Model model) {
         logger.info("Method editProduct executed -- my logger");
+        String productCategory = String.valueOf(productBaseRepository.findOne(id).getProductCategory());
         model.addAttribute("product", productBaseRepository.findOne(id));
-        model.addAttribute("productType", productBaseRepository.findOne(id).getProductCategory());
+        model.addAttribute("productType", productCategory);
+        if (productCategory.equalsIgnoreCase(String.valueOf(ProductCategory.Cake))) {
+            Cake cake = (Cake) productBaseRepository.findOne(id);
+            double weight = cake.getWeight();
+            logger.info("Edit cakes executed, where cake weight = " + String.valueOf(weight));
+            model.addAttribute("weight",weight);
+        } else if (productCategory.equalsIgnoreCase(String.valueOf(ProductCategory.Candies))) {
+            Candies candies = (Candies) productBaseRepository.findOne(id);
+            long count = candies.getCount();
+            logger.info("Edit candies executed, where candies count = " + String.valueOf(count));
+            model.addAttribute("count", count);
+        }
         return PRODUCT_FORM_VIEW;
     }
 
     @RequestMapping(value = PRODUCT_CAKE_VIEW, method = RequestMethod.POST)
-    public String saveCake(Cake cake, @ModelAttribute("file") MultipartFile file) throws IOException {
+    public String saveCake(@ModelAttribute("file") MultipartFile file, @ModelAttribute("stringURL") String stringURL, @Valid Cake cake, BindingResult bindingResult) throws IOException {
         logger.info("Method saveCake executed -- my logger");
-        cake.setProductCategory(ProductCategory.Cake);
-        cake.setImageData(file.getBytes());
-        cakeBaseRepository.save(cake);
-        return PRODUCT_REDIRECT_VIEW + cake.getId();
+
+        stringURL = getURL(stringURL);
+
+        if (!bindingResult.hasErrors()) {
+            cake.setProductCategory(ProductCategory.Cake);
+            if (file.getSize() != 0) {
+                cake.setImageData(file.getBytes());
+            }
+            cakeBaseRepository.save(cake);
+            return PRODUCT_REDIRECT_VIEW + cake.getId();
+        }
+        return "redirect:/" + stringURL;
     }
 
     @RequestMapping(value = PRODUCT_CANDIES_VIEW, method = RequestMethod.POST)
-    public String saveCandies(Candies candies, @ModelAttribute("file") MultipartFile file) throws IOException {
+    public String saveCandies(@ModelAttribute("file") MultipartFile file, @ModelAttribute("stringURL") String stringURL, @Valid Candies candies, BindingResult bindingResult) throws IOException {
         logger.info("Method saveCandies executed -- my logger");
-        candies.setProductCategory(ProductCategory.Candies);
-        candies.setImageData(file.getBytes());
-        candiesBaseRepository.save(candies);
-        return PRODUCT_REDIRECT_VIEW + candies.getId();
+
+        stringURL = getURL(stringURL);
+
+        if (!bindingResult.hasErrors()) {
+            candies.setProductCategory(ProductCategory.Candies);
+            if (file.getSize() != 0) {
+                candies.setImageData(file.getBytes());
+            }
+            candiesBaseRepository.save(candies);
+            return PRODUCT_REDIRECT_VIEW + candies.getId();
+        }
+        return "redirect:/" + stringURL;
+    }
+
+    private String getURL(@ModelAttribute("stringURL") String stringURL) {
+        if (stringURL.contains("product/new")){
+            stringURL = "product/new";
+        } else if (stringURL.contains("product/edit")) {
+            int startString = stringURL.indexOf("product/edit");
+            stringURL = stringURL.substring(startString);
+        }
+        return stringURL;
     }
 
     @RequestMapping(DELETE_PRODUCT_BY_ID_VIEW)
