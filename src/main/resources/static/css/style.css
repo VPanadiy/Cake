@@ -64,13 +64,104 @@ input[type="password"] {
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 }
-/*  ------------------------  index   ------------------------ */
+/*  ------------------------  navigation top menu   ------------------------ */
 .top_menu {
-	background: #fff;
+	height: 102px;
 	margin-left: 30px;
+	display: flex;
+    width: 100%;
+}
+.top_menu_left {
+	width: 90px;
+	height: 100%;
+	background-image:url("../images/nav_left.png");
+	background-size: 100% 100%;
+}
+.top_menu_center {
+	background-image:url("../images/nav.png");
+	background-size: 100% 100%;
+	height: 81px;
 	padding-right: 20px;
 }
+.top_menu_center a {
+    padding: 20px;
+	padding-top: 30px;
+    float: right;
+    color: white;
+    font-family: cursive;
+    font-weight: bold;
+    text-decoration: none;
+}
+.top_menu_center a:hover {
+    color: blue;
+    text-decoration: none;
+}
+.top_menu_right {
+	width: 90px;
+	height: 100%;
+	background-image:url("../images/nav_right.png");
+	background-size: 100% 100%;
+}
 
+/*--------------------------- language_flag -----------------------------*/
+.language_flag{
+    width: 300px;
+    height: 90px;
+    display: flex;
+}
+.language_flag a{
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+.flag_en{
+    display: block;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    background-image: url("../images/us_footer.png");
+    background-size: 100% 100%;
+}
+.flag_en:hover{
+    background-image: url("../images/us_top.png");
+    background-size: 100% 100%;
+    border-radius: 100%;
+}
+.flag_ua{
+    display: block;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    background-image: url("../images/ua_footer.png");
+    background-size: 100% 100%;
+}
+
+.flag_ua:hover{
+    background-image: url("../images/ua_top.png");
+    background-size: 100% 100%;
+    border-radius: 100%;
+}
+.flag_ru{
+    display: block;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    background-image: url("../images/ru_footer.png");
+    background-size: 100% 100%;
+}
+.flag_ru:hover{
+    background-image: url("../images/ru_top.png");
+    background-size: 100% 100%;
+    border-radius: 100%;
+}
+/*--------------------------- footer -----------------------------*/
+
+.footer {
+    display: inline;
+    width: 100%;
+    height: 10%;
+}
 /*  ------------------------  calendar   ------------------------ */
 
 .calendar td{
