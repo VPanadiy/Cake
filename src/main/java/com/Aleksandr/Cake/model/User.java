@@ -46,6 +46,9 @@ public class User {
     @OneToMany(mappedBy="userId")
 	private Set<Orders> orders;
 
+	@OneToMany(mappedBy="userId")
+	private Set<UserComments> userComments;
+
 	public int getId() {
 		return id;
 	}
@@ -108,6 +111,14 @@ public class User {
 
     public void setOrders(Set<Orders> orders) {
         this.orders = orders;
+    }
+
+    public Set<UserComments> getUserComments() {
+        return userComments;
+    }
+
+    public void setUserComments(Set<UserComments> userComments) {
+        this.userComments = userComments;
     }
 
     @Override

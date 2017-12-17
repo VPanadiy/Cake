@@ -7,6 +7,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Set;
 
 @Entity
 @Table(name = "PRODUCT")
@@ -16,6 +18,7 @@ public abstract class AbstractProduct<T extends AbstractProduct> implements Prod
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "name")
@@ -30,19 +33,28 @@ public abstract class AbstractProduct<T extends AbstractProduct> implements Prod
     @NotNull(message = "*Please provide product price")
     private BigDecimal price;
 
+    @Column(name = "product_category")
     @Enumerated(EnumType.STRING)
     private ProductCategory productCategory;
 
+    @Column(name = "rating")
+    private double rating;
+
+    @Column(name = "image_data")
     private byte[] imageData;
+
+    @OneToMany(mappedBy="productId")
+    private Set<UserComments> userComments;
 
     public AbstractProduct() {
     }
 
-    public AbstractProduct(String name, String description, BigDecimal price, ProductCategory productCategory, byte[] imageData) {
+    public AbstractProduct(String name, String description, BigDecimal price, ProductCategory productCategory, double rating, byte[] imageData) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.productCategory = productCategory;
+        this.rating = rating;
         this.imageData = imageData;
     }
 
@@ -88,6 +100,14 @@ public abstract class AbstractProduct<T extends AbstractProduct> implements Prod
         this.productCategory = productCategory;
     }
 
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
     public byte[] getImageData() {
         return imageData;
     }
@@ -96,27 +116,44 @@ public abstract class AbstractProduct<T extends AbstractProduct> implements Prod
         this.imageData = imageData;
     }
 
+    public Set<UserComments> getUserComments() {
+        return userComments;
+    }
+
+    public void setUserComments(Set<UserComments> userComments) {
+        this.userComments = userComments;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AbstractProduct that = (AbstractProduct) o;
+        AbstractProduct<?> that = (AbstractProduct<?>) o;
 
+        if (Double.compare(that.rating, rating) != 0) return false;
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
-        return productCategory == that.productCategory;
+        if (productCategory != that.productCategory) return false;
+        if (!Arrays.equals(imageData, that.imageData)) return false;
+        return userComments != null ? userComments.equals(that.userComments) : that.userComments == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result;
+        long temp;
+        result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (productCategory != null ? productCategory.hashCode() : 0);
+        temp = Double.doubleToLongBits(rating);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + Arrays.hashCode(imageData);
+        result = 31 * result + (userComments != null ? userComments.hashCode() : 0);
         return result;
     }
 

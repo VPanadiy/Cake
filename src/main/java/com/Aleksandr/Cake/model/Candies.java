@@ -13,7 +13,8 @@ public class Candies extends AbstractCandies<Candies> {
     public Candies() {
     }
 
-    public Candies(String name, String description, BigDecimal price, ProductCategory productCategory, byte[] imageData, long count) {
-        super(name, description, price, productCategory, imageData, count);
+    public Candies(String name, String description, BigDecimal price, ProductCategory productCategory, double rating, byte[] imageData, long count) {
+        super(name, description, price, productCategory, rating, imageData, count);
     }
+
 }

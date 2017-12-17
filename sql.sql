@@ -72,6 +72,7 @@ CREATE TABLE IF NOT EXISTS Product (
   weight DOUBLE PRECISION DEFAULT 0,
   count BIGINT DEFAULT 0,
   product_type VARCHAR(50),
+  rating numeric(9,2) DEFAULT 0,
   image_data bytea
 );
 
@@ -102,6 +103,18 @@ CREATE TABLE order_details
 );
 
 select * from order_details;
+
+DROP TABLE user_comments;
+
+CREATE TABLE user_comments
+(
+  id bigint NOT NULL,
+  user_id integer REFERENCES users (user_id),
+  product_id bigint REFERENCES product (id),
+  post text NOT NULL
+);
+
+select * from user_comments;
 
 CREATE TABLE schedule
 (

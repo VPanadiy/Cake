@@ -5,6 +5,7 @@ import com.Aleksandr.Cake.model.*;
 import com.Aleksandr.Cake.model.enums.ProductCategory;
 import com.Aleksandr.Cake.repository.OrderDetailsRepository;
 import com.Aleksandr.Cake.repository.OrdersRepository;
+import com.Aleksandr.Cake.repository.UserCommentsRepository;
 import com.Aleksandr.Cake.repository.productRepository.CakeBaseRepository;
 import com.Aleksandr.Cake.repository.productRepository.CandiesBaseRepository;
 import com.Aleksandr.Cake.repository.productRepository.ProductBaseRepository;
@@ -65,6 +66,10 @@ public class ProductController {
     private OrderDetailsRepository orderDetailsRepository;
 
     @Autowired
+    @Qualifier("userCommentsRepository")
+    private UserCommentsRepository userCommentsRepository;
+
+    @Autowired
     private UserService userService;
 
     @Autowired
@@ -95,6 +100,7 @@ public class ProductController {
     public String showProduct(@PathVariable Long id, Model model) {
         logger.info("Method showProduct executed -- my logger");
         model.addAttribute("product", productBaseRepository.findOne(id));
+        model.addAttribute("comments", userCommentsRepository.findAll());
         return PRODUCT_SHOW_VIEW;
     }
 
@@ -117,7 +123,7 @@ public class ProductController {
             Cake cake = (Cake) productBaseRepository.findOne(id);
             double weight = cake.getWeight();
             logger.info("Edit cakes executed, where cake weight = " + String.valueOf(weight));
-            model.addAttribute("weight",weight);
+            model.addAttribute("weight", weight);
         } else if (productCategory.equalsIgnoreCase(String.valueOf(ProductCategory.Candies))) {
             Candies candies = (Candies) productBaseRepository.findOne(id);
             long count = candies.getCount();
@@ -162,7 +168,7 @@ public class ProductController {
     }
 
     private String getURL(@ModelAttribute("stringURL") String stringURL) {
-        if (stringURL.contains("product/new")){
+        if (stringURL.contains("product/new")) {
             stringURL = "product/new";
         } else if (stringURL.contains("product/edit")) {
             int startString = stringURL.indexOf("product/edit");
@@ -233,6 +239,19 @@ public class ProductController {
         redirectAttributes.addFlashAttribute("flashProductMessage", " added to shopping cart!");
 
         return PRODUCTS_REDIRECT_VIEW;
+    }
+
+    @RequestMapping(value = "/addPostToProduct", method = RequestMethod.POST)
+    public String addPostToProduct(@ModelAttribute(value = "productId") Long id, @ModelAttribute(value = "comment") String comment, UserComments userComments) {
+        logger.info("Method addPostToProduct executed -- my logger");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        logger.info("User found! User id: " + user.getId());
+        userComments.setUserId(user);
+        userComments.setProductId(productBaseRepository.findOne(id));
+        userComments.setPost(comment);
+        userCommentsRepository.save(userComments);
+        return PRODUCT_REDIRECT_VIEW + id;
     }
 
     @RequestMapping("/shoppingCart")

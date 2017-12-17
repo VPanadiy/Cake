@@ -13,7 +13,8 @@ public class Cake extends AbstractCake<Cake> {
     public Cake() {
     }
 
-    public Cake(String name, String description, BigDecimal price, ProductCategory productCategory, byte[] imageData, double weight) {
-        super(name, description, price, productCategory, imageData, weight);
+    public Cake(String name, String description, BigDecimal price, ProductCategory productCategory, double rating, byte[] imageData, double weight) {
+        super(name, description, price, productCategory, rating, imageData, weight);
     }
+
 }

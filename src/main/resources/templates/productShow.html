@@ -51,7 +51,6 @@
                 <div class="col-sm-12">
                     <div class="panel panel-default text-left">
                         <div class="panel-body">
-                            <p contenteditable="true">Status: Feeling Blue</p>
                             <button type="button" class="btn btn-default btn-sm">
                                 <span class="glyphicon glyphicon-thumbs-up"></span> Like
                             </button>
@@ -60,20 +59,33 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="well">
-                        <p>John</p>
-                        <img th:src="@{/images/defaultImage.png}" class="img-circle" height="55" width="55" alt="Avatar">
+            <div class="col-sm-12">
+                <form action="#" th:action="@{/addPostToProduct}" method="POST">
+                    <input type="hidden" th:name="productId" th:value="${product.id}"/>
+                    <div class="form-group">
+                        <label for="comment">Comment:</label>
+                        <textarea class="form-control" rows="5" id="comment" th:name="comment"></textarea>
                     </div>
-                </div>
-                <div class="col-sm-9">
-                    <div class="well">
-                        <p>Just Forgot that I had to mention something about someone to someone about how I forgot
-                            something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-                    </div>
-                </div>
+                    <p><input type="submit" value="Отправить"></p>
+                </form>
             </div>
+
+            <dl th:each="comment : ${comments}">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <p th:text="${comment.userId.getName()}"></p>
+                            <img th:src="@{/images/defaultImage.png}" class="img-circle" height="55" width="55"
+                                 alt="Avatar">
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="well">
+                            <p th:text="${comment.getPost()}"></p>
+                        </div>
+                    </div>
+                </div>
+            </dl>
 
         </div>
 
