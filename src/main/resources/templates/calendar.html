@@ -1,33 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	th:with="lang=${#locale.language}" th:lang="${lang}">
-<head>
-<title th:text="#{label.title.schedule}"></title>
-<link rel="stylesheet" th:href="@{/css/style.css}" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta charset="UTF-8">
+<!-- HEADER -->
+<head th:lang="${lang}">
+<title th:text="#{label.Calendar}"></title>
+<!--/*/ <th:block th:include="include/headerinc :: head"></th:block> /*/-->
 </head>
-<body>
-	<p>Cake</p>
-	<div
-		style="text-align: right; padding: 5px; margin: 5px 0px; background: #ccc;">
-		<a href="/calendar?lang=en" th:text="#{label.LanguageEN}"></a> <a
-			href="/calendar?lang=ua" th:text="#{label.LanguageUA}"></a>
-	</div>
-	<div>
-		<div lang="en" th:include="include/login :: form"></div>
-	</div>
 
-	<div class="top_menu">
-		<a href="/index" th:text="#{label.General}"></a> <a href="#"
-			th:text="#{label.Our_products}"></a> <a href="#"
-			th:text="#{label.Feedback}"></a> <a href="#" alt="Contact"
-			th:text="#{label.Contact}"></a> <a href="#" alt="Delivery"
-			th:text="#{label.Delivery}"></a> <a href="#" alt="Ingredients"
-			th:text="#{label.Ingredients}"></a> <a href="/calendar"
-			alt="Calendar" th:text="#{label.Calendar}"></a>
-	</div>
-	<p>calendar</p>
+<body>
+	<!--/*/ <th:block th:include="include/header :: header"></th:block> /*/-->
+
+	<p th:text="#{label.Calendar}+${thisMonth}+${thisYear} ">Calendar</p>
 	<div>
 		<table>
 			<tr th:each="schedule : ${schedules}">
@@ -42,43 +26,62 @@
 		<div></div>
 	</div>
 
-	<br>
-	<div>
-		<div >
-			<a href="calendar.html" th:href="@{/calendar(month=${previous})}" >previous</a>
+	<div class="calendar_order">
+		<div>
+			<a th:href="${'/calendar/month=' + previous}" th:text="previous">previous</a>
 		</div>
-		<div >
-			<a  th:href="@{/calendar(month=${next})}">next</a>
+		<div>
+			<a th:href="${'/calendar/month=' + next}" th:text="next">next</a>
 		</div>
-		<table class="calendar">
-			<tr style="float: right;" th:each="name : ${nameWeek}">
-				<td
-					style="background: #fff; text-align: right; width: 150px; height: 20px; padding: 10px;"
-					th:text="${name.key}" />
+
+		<table>
+			<tr th:each="name : ${nameWeek}">
+				<td th:text="${name}" />
 			</tr>
-			<tr style="float: right;" th:each="week : ${weeks}">
-				<td
-					style="background: #fff; text-align: right; width: 150px; height: 200px; padding: 10px;"
-					th:each="day : ${allMonth.get(week)}">
-					<p th:text="${day.key}"></p>
+
+			<tr th:each="week : ${weeks}">
+
+				<td th:each="day : ${allMonth.get(week)}">
+				<a th:href="${'/calendar/informationByDay='} + ${day.key}" th:text="${day.key}"></a>
 					<div th:each="list : ${day.value}">
 						<p th:text="${list.getDate_order()}" />
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 	</div>
+	
+	<div th:fragment="form" xmlns:th="http://www.w3.org/1999/xhtml">
+		<div th:if="${isUser}">
+			<div lang="en" th:include="include/authorization :: user"></div>
+		</div>
+		<div th:unless="${isUser}">
+			<div lang="en" th:include="include/authorization :: registration"></div>
+		</div>
+	</div>
+
 	<!-- th:value="${#dates.format(schedule.date_order,'MM/dd/yyyy HH:mm')}"  -->
-	<form action="/calendar" th:action="@{/calendar}" th:object="${schedule}"  method="post">
-	<p>Title: <input type="text"  name="title"></p>
-	<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
-	<p>Description: <input type="text"  name="description"></p>
-	<p>Name: <input type="text"  name="name"></p>
-	<p>Phone: <input type="text"  name="phone"></p>
-	<p>Date: <input th:type="text" name="date_order" ></p>
-	<input type="hidden"  name="active" value="0">
-	<input type="submit">
+
+
+	<form class="add_active_for_calendar" action="/calendar"
+		th:action="@{/calendar}" th:object="${schedule}" method="post">
+		<p>
+			Title: <input type="text" name="title">
+		</p>
+		<!-- <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Name Error</p>  -->
+		<p>
+			Description: <input type="text" name="description">
+		</p>
+		<p>
+			Name: <input type="text" name="name">
+		</p>
+		<p>
+			Phone: <input type="text" name="phone">
+		</p>
+		<p>
+			Date: <input type="date" name="date_order">
+		</p>
+		<input type="hidden" name="active" value="0"> <input
+			type="submit">
 	</form>
+
 	<div lang="en" th:include="include/footer :: footer"></div>
-</body>
-</html>

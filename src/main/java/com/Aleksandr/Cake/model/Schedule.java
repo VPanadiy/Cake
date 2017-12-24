@@ -8,8 +8,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "schedule")
@@ -21,6 +29,8 @@ public class Schedule {
 	private long id;
 	
 	@Column(name = "title")
+	@NotNull
+	@Size(min=5, max=20,  message = "Username size should be in the range [2...30]")
 	private String title;
 	
 	@Column(name = "description")
@@ -32,7 +42,10 @@ public class Schedule {
 	@Column(name = "phone")
 	private String phone;
 	
-	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+//	@DateTimeFormat(iso=ISO.DATE)
+//	@Temporal(TemporalType.TIMESTAMP) // if need show time in calendar
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_order")
 	private Date date_order;
 	
