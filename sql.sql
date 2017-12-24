@@ -111,7 +111,9 @@ CREATE TABLE user_comments
   id bigint NOT NULL,
   user_id integer REFERENCES users (user_id),
   product_id bigint REFERENCES product (id),
-  post text NOT NULL
+  post text NOT NULL,
+  user_ip VARCHAR(15),
+  local_date_time TIMESTAMP
 );
 
 select * from user_comments;

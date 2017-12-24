@@ -34,10 +34,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
 
 import static com.Aleksandr.utils.CONST.URL_PRODUCTS;
 import static com.Aleksandr.utils.ViewURLs.*;
@@ -100,7 +98,7 @@ public class ProductController {
     public String showProduct(@PathVariable Long id, Model model) {
         logger.info("Method showProduct executed -- my logger");
         model.addAttribute("product", productBaseRepository.findOne(id));
-        model.addAttribute("comments", userCommentsRepository.findAll());
+        model.addAttribute("comments", userCommentsRepository.findByProductId(productBaseRepository.findOne(id)));
         return PRODUCT_SHOW_VIEW;
     }
 
@@ -180,6 +178,7 @@ public class ProductController {
     @RequestMapping(DELETE_PRODUCT_BY_ID_VIEW)
     public String deleteProduct(@PathVariable Long id) {
         logger.info("Method deleteProduct executed -- my logger");
+        userCommentsRepository.removeByProductId(productBaseRepository.findOne(id));
         productBaseRepository.delete(id);
         return PRODUCTS_REDIRECT_VIEW;
     }
@@ -242,7 +241,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/addPostToProduct", method = RequestMethod.POST)
-    public String addPostToProduct(@ModelAttribute(value = "productId") Long id, @ModelAttribute(value = "comment") String comment, UserComments userComments) {
+    public String addPostToProduct(@ModelAttribute(value = "productId") Long id, @ModelAttribute(value = "comment") String comment, UserComments userComments, HttpServletRequest request) {
         logger.info("Method addPostToProduct executed -- my logger");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
@@ -250,6 +249,28 @@ public class ProductController {
         userComments.setUserId(user);
         userComments.setProductId(productBaseRepository.findOne(id));
         userComments.setPost(comment);
+
+//        Map of information from user request
+
+//        Map<String, String> result = new HashMap<>();
+//        Enumeration headerNames = request.getHeaderNames();
+//        while (headerNames.hasMoreElements()) {
+//            String key = (String) headerNames.nextElement();
+//            String value = request.getHeader(key);
+//            result.put(key, value);
+//        }
+
+        String userIP = "";
+
+        if (request != null) {
+            userIP = request.getHeader("X-FORWARDED-FOR");
+            if (userIP == null || "".equals(userIP)) {
+                userIP = request.getRemoteAddr();
+            }
+        }
+
+        userComments.setUserIP(userIP);
+        userComments.setLocalDateTime(LocalDateTime.now());
         userCommentsRepository.save(userComments);
         return PRODUCT_REDIRECT_VIEW + id;
     }

@@ -27,7 +27,7 @@
                         <li>
                             <div class="navbar-form navbar-right">
 
-                                <div sec:authorize="isAuthenticated()" style="display: inline-flex">
+                                <div sec:authorize="isAuthenticated()" >
                                     <a class="btn btn-success" th:href="@{/index}" style="margin-right: 4px;" th:text="#{label.Account_page}">Account page</a>
                                     <form class="form-horizontal" th:action="@{/logout}" method="post">
                                         <a><input class="btn btn-warning" type="submit" th:value="#{label.logout}"/></a>
@@ -35,10 +35,8 @@
                                 </div>
 
                                 <div sec:authorize="isAnonymous()">
-                                    <a class="btn btn-success" th:href="@{/index}" th:text="#{label.login}">Login</a>
-                                    <a class="btn btn-primary" th:href="@{/registration}" th:text="#{label.registration}">Registration</a>
+                                    <a style="padding-top: 8px;" class="glyphicon glyphicon-log-in" th:href="@{/index}" th:text="#{label.login}">Login</a>
                                 </div>
-
                             </div>
                         </li>
 

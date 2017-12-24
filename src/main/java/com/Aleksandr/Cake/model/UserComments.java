@@ -1,6 +1,7 @@
 package com.Aleksandr.Cake.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user_comments")
@@ -21,6 +22,12 @@ public class UserComments {
 
     @Column(name = "post")
     private String post;
+
+    @Column(name = "user_ip")
+    private String userIP;
+
+    @Column(name = "local_date_time")
+    private LocalDateTime localDateTime;
 
     public Long getId() {
         return id;
@@ -54,6 +61,22 @@ public class UserComments {
         this.post = post;
     }
 
+    public String getUserIP() {
+        return userIP;
+    }
+
+    public void setUserIP(String userIP) {
+        this.userIP = userIP;
+    }
+
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
+    }
+
     @Override
     public String toString() {
         return "UserComments{" +
@@ -61,7 +84,8 @@ public class UserComments {
                 ", userId=" + userId +
                 ", productId=" + productId +
                 ", post='" + post + '\'' +
+                ", userIP='" + userIP + '\'' +
+                ", localDateTime=" + localDateTime +
                 '}';
     }
-
 }
