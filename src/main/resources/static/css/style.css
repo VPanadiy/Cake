@@ -38,11 +38,11 @@ label {
 	padding: 30px 38px 66px;
 	margin: 0 auto;
 	background-color: #eee;
-	border: 3px dotted rgba(0,0,0,0.1);
+	border: 3px dotted rgba(0, 0, 0, 0.1);
 }
 
 .form-signin-heading {
-	text-align:center;
+	text-align: center;
 	margin-bottom: 30px;
 }
 
@@ -163,7 +163,29 @@ input[type="password"] {
     height: 10%;
 }
 /*  ------------------------  calendar   ------------------------ */
+.calendar_order table{
+	background-color: #cccccc;
+	width: 1190px;
+	margin: 10px;
+}
+.calendar_order table td {
+	background: #fff;
+	text-align: right;
+	width: 150px;
+	height: 200px;
+	padding: 10px;
+	margin-right: 10px;
+	border: 1px solid black;
 
-.calendar td{
-	text-align: right; width:150px; height: 200px; padding:10px; background: #ccc;
+}
+.calendar_order table :hover {
+	background: #ccc;
+
+}
+.calendar_order table tr {
+	float: right;
+}
+
+.add_active_for_calendar{
+	text-align: center;
 }
