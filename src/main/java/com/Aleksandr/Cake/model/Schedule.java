@@ -47,17 +47,17 @@ public class Schedule {
 //	@Temporal(TemporalType.TIMESTAMP) // if need show time in calendar
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_order")
-	private Date date_order;
+	private Date dateOreder;
 	
 	@Column(name = "active")
 	private int active;
 	
-	public Date getDate_order() {
-		return date_order;
+	public Date getDateOrder() {
+		return dateOreder;
 	}
 
-	public void setDate_order(Date date_order) {
-		this.date_order = date_order;
+	public void setDateOrder(Date date_order) {
+		this.dateOreder = date_order;
 	}
 
 	public int getActive() {
@@ -113,7 +113,7 @@ public class Schedule {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + active;
-		result = prime * result + ((date_order == null) ? 0 : date_order.hashCode());
+		result = prime * result + ((dateOreder == null) ? 0 : dateOreder.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -131,10 +131,10 @@ public class Schedule {
 		Schedule other = (Schedule) obj;
 		if (active != other.active)
 			return false;
-		if (date_order == null) {
-			if (other.date_order != null)
+		if (dateOreder == null) {
+			if (other.dateOreder != null)
 				return false;
-		} else if (!date_order.equals(other.date_order))
+		} else if (!dateOreder.equals(other.dateOreder))
 			return false;
 		if (id != other.id)
 			return false;
@@ -154,7 +154,7 @@ public class Schedule {
 	@Override
 	public String toString() {
 		return "Schedule [id=" + id + ", title=" + title + ", description=" + description + ", name=" + name
-				+ ", phone=" + phone + ", date=" + date_order + ", active=" + active + "]";
+				+ ", phone=" + phone + ", date=" + dateOreder + ", active=" + active + "]";
 	}
 	
 	

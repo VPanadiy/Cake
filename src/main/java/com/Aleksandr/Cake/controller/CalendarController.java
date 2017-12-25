@@ -32,12 +32,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.Aleksandr.Cake.model.Schedule;
 import com.Aleksandr.Cake.repository.ScheduleRepository;
 
 @Controller
+//@RestController 
 public class CalendarController {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(CalendarController.class);
@@ -49,7 +53,7 @@ public class CalendarController {
 
 	@RequestMapping(value = "/calendar")
 	public String calendar(Model model) {
-		createCalendar(model, true, 0);
+		createCalendar(model, 0, 0);
 
 		return "calendar";
 	}
@@ -64,31 +68,27 @@ public class CalendarController {
 		return "redirect:/calendar";
 	}
 	
-	
 	@RequestMapping(value = "/calendar/month={month}", method=RequestMethod.GET)
 	public String calendar(@PathVariable("month") int month,  Model model) {
 		LOGGER.info("------ Open with month: " + month + ".....................................................................");
-		createCalendar(model, false, month);
+		createCalendar(model, month, 0);
+		return "calendar";
+	}
+
+	@RequestMapping(value = "/calendar/month={month}/day={day}", method=RequestMethod.GET)
+	public String calendarForDay(@PathVariable("month") int month, @PathVariable("day") int day, Model model) {
+		LOGGER.info("------ Open with day: " + day + "Open with month:"+ month +" .....................................................................");
+		createCalendar(model, month, day);
 		return "calendar";
 	}
 	
-	@RequestMapping(value = "/calendar/informationByDay={day}", method=RequestMethod.GET)
-	public String calendarForDay(@ModelAttribute(value = "thisMonth") int month, @PathVariable("day") String day, Model model) {
-		LOGGER.info("------ Open with month: " + day + ".....................................................................");
-		LOGGER.info("------ Open with month: " + month + ".....................................................................");
-		LOGGER.info("------ Open with month: " + model + ".....................................................................");
-//		createCalendar(model, false, month);
-		return "calendar";
-	}
-	
-	
-	
-	private void createCalendar(Model model, boolean current, int monthFromWeb) {
+	private void createCalendar(Model model, int monthFromWeb, int dayFromWeb) {
 		LOGGER.info("-- Open page calendar");
+		
 		List<Schedule> schedules = scheduleRepository.findAll();
 		GregorianCalendar cal = new GregorianCalendar();
 
-		int month = current ? cal.get(Calendar.MONTH) : monthFromWeb;
+		int month = monthFromWeb == 0 ? cal.get(Calendar.MONTH) : monthFromWeb;
 
 		GregorianCalendar startMonth = new GregorianCalendar(cal.get(Calendar.YEAR), month, 1);
 
@@ -100,7 +100,8 @@ public class CalendarController {
 		Map<Integer, Map<Integer, List<Schedule>>> allMonth = new HashMap<>();
 
 		int firstDay = 8 - startMonth.get(Calendar.DAY_OF_WEEK); // get number day of week
-
+		
+		List<Schedule> listScheduleOnDay = new ArrayList<>();
 		for (int i = 1; i < daysInMonth + 1; i++) {
 			if (i <= firstDay) {
 				createMap(allMonth, i, 1, schedules, startMonth);
@@ -115,6 +116,9 @@ public class CalendarController {
 			} else {
 				createMap(allMonth, i, 6, schedules, startMonth);
 			}
+			if(i == dayFromWeb) {
+				listScheduleOnDay = createMap(allMonth, i, 1, schedules, startMonth);
+			}
 		}
 
 		Map<String, Integer> nameWeek = cal.getDisplayNames(Calendar.DAY_OF_WEEK, Calendar.SHORT_STANDALONE, Locale.US);
@@ -128,6 +132,7 @@ public class CalendarController {
 		
 		model.addAttribute("thisMonth", startMonth.get(Calendar.MONTH));
 		model.addAttribute("thisYear", startMonth.get(Calendar.YEAR));
+		model.addAttribute("thisDay", listScheduleOnDay);
 		model.addAttribute("previous", (month - 1));
 		model.addAttribute("next", (month + 1));
 		model.addAttribute("nameWeek", result);
@@ -137,7 +142,7 @@ public class CalendarController {
 		model.addAttribute("allMonth", allMonth);
 	}
 
-	private void createMap(Map<Integer, Map<Integer, List<Schedule>>> allMonth, int stepDay, int week,
+	private List<Schedule> createMap(Map<Integer, Map<Integer, List<Schedule>>> allMonth, int stepDay, int week,
 			List<Schedule> schedules, GregorianCalendar cal) {
 		int thisYear = cal.get(Calendar.YEAR);
 		int thisMonth = cal.get(Calendar.MONTH);
@@ -145,7 +150,7 @@ public class CalendarController {
 		Calendar calendar = new GregorianCalendar();
 
 		List<Schedule> thisDay = schedules.stream().filter(d -> {
-			calendar.setTime(d.getDate_order());
+			calendar.setTime(d.getDateOrder());
 			if (calendar.get(Calendar.DAY_OF_MONTH) == stepDay && calendar.get(Calendar.MONTH) == thisMonth
 					&& calendar.get(Calendar.YEAR) == thisYear) {
 				return true;
@@ -162,5 +167,7 @@ public class CalendarController {
 		}
 
 		allMonth.put(week, aboutThisDay);
+		
+		return thisDay;
 	}
 }

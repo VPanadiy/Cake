@@ -11,19 +11,19 @@
 <body>
 	<!--/*/ <th:block th:include="include/header :: header"></th:block> /*/-->
 
-	<p th:text="#{label.Calendar}+${thisMonth}+${thisYear} ">Calendar</p>
+	<p th:if="${thisMonth} != null" th:text="#{label.Calendar}+${thisMonth}+${thisYear} ">Calendar</p>
+	
 	<div>
 		<table>
 			<tr th:each="schedule : ${schedules}">
 				<td th:text="${schedule.id}">1</td>
-				<td><a href="#" th:text="${schedule.title}">Title</a></td>
+				<td><a href="#" th:text="${schedule.getTitle()}">Title</a></td>
 				<td th:text="${schedule.description}">Text</td>
-				<td th:text="${schedule.date_order}">Text</td>
+				<td th:text="${schedule.dateOrder}">Text</td>
 
 				<td th:text="${isUser}">Text</td>
 			</tr>
 		</table>
-		<div></div>
 	</div>
 
 	<div class="calendar_order">
@@ -42,25 +42,30 @@
 			<tr th:each="week : ${weeks}">
 
 				<td th:each="day : ${allMonth.get(week)}">
-				<a th:href="${'/calendar/informationByDay='} + ${day.key}" th:text="${day.key}"></a>
+				<!--work <a th:href="@{'/calendar?month={month}'(month=${thisMonth}, day=${day.key})}" th:text="${day.key}"></a> -->
+				<a th:href="@{'/calendar/month={month}/day={day}'(month=${thisMonth}, day=${day.key})}" th:text="${day.key}"></a> 
+<!-- 				<a th:href="${'/calendar?month={month}&informationByDay={day}'(month=${thisMonth},day=${day.key})}" th:text="${day.key}"></a> -->
 					<div th:each="list : ${day.value}">
-						<p th:text="${list.getDate_order()}" />
-					</div></td>
+						<p th:text="${list.getDateOrder()}" />
+					</div>
+				</td>
 			</tr>
 		</table>
 	</div>
-	
-	<div th:fragment="form" xmlns:th="http://www.w3.org/1999/xhtml">
-		<div th:if="${isUser}">
-			<div lang="en" th:include="include/authorization :: user"></div>
-		</div>
-		<div th:unless="${isUser}">
-			<div lang="en" th:include="include/authorization :: registration"></div>
-		</div>
+
+
+	<div th:if="${!thisDay.isEmpty()}">
+			<table>
+			<tr th:each="list : ${thisDay}">
+				<td th:text="${list.getId()}">1</td>
+				<td><a href="#" th:text="${list.title}">Title</a></td>
+				<td th:text="${list.description}">Text</td>
+				<td th:text="${list.dateOrder}">Text</td>
+
+				<td th:text="${isUser}">Text</td>
+			</tr>
+		</table>
 	</div>
-
-	<!-- th:value="${#dates.format(schedule.date_order,'MM/dd/yyyy HH:mm')}"  -->
-
 
 	<form class="add_active_for_calendar" action="/calendar"
 		th:action="@{/calendar}" th:object="${schedule}" method="post">
@@ -78,7 +83,7 @@
 			Phone: <input type="text" name="phone">
 		</p>
 		<p>
-			Date: <input type="date" name="date_order">
+			Date: <input type="date" name="dateOrder">
 		</p>
 		<input type="hidden" name="active" value="0"> <input
 			type="submit">
