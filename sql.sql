@@ -66,7 +66,7 @@ DROP TABLE product;
 CREATE TABLE IF NOT EXISTS Product (
   id SERIAL PRIMARY KEY,
   name VARCHAR(50),
-  description  VARCHAR(50),
+  description  VARCHAR(255),
   price NUMERIC(9,2),
   productCategory  VARCHAR(50),
   weight DOUBLE PRECISION DEFAULT 0,

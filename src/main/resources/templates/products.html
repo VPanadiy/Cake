@@ -64,11 +64,11 @@
                         <div class="panel-heading">
                             <div style="width: 85%; float: left;"
                                  th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">
-                                <span th:text="${product.id} + ' ' + ${product.name}">Product name</span>
+                                <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" th:text="${product.id} + ' ' + ${product.name}">Product name</p>
                             </div>
                             <div style="width: 75%"
                                  th:unless="${#authorization.expression('hasAuthority(''ADMIN'')')}">
-                                <span th:text="${product.name}">Product name</span>
+                                <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" th:text="${product.name}">Product name</p>
                             </div>
                             <div>
                                 <a sec:authorize="hasAuthority('ADMIN')"
@@ -95,13 +95,15 @@
                                          style="width: 100%; height: 200px" alt="Image">
                                 </div>
                             </a>
-                            <span>Description: </span><span
-                                th:text="${product.description}">Product Description</span><br>
-                            <span th:if="${#strings.toString(product.productCategory)} == 'Cake'"
-                                  th:text="'Weight: ' + ${product.weight}">Weight</span>
-                            <span th:unless="${#strings.toString(product.productCategory)} == 'Cake'"
-                                  th:text="'Count: ' + ${product.count}">Count</span><br>
-                            <span th:text="'Price: ' + ${product.price}">Product Price</span>
+                            <div th:if="${#strings.toString(product.productCategory)} == 'Cake'">
+                                <strong style="float: inline-start; margin-right: 3px;">Weight: </strong><p style="margin-bottom: 0px;" th:text="${product.weight}">Weight</p>
+                            </div>
+                            <div th:unless="${#strings.toString(product.productCategory)} == 'Cake'">
+                                <strong style="float: inline-start; margin-right: 3px;">Count: </strong><p style="margin-bottom: 0px;" th:text="${product.count}">Count</p>
+                            </div>
+                            <strong style="float: inline-start; margin-right: 3px;">Price: </strong><p style="margin-bottom: 0px;" th:text="${product.price}">Price</p>
+                            <strong style="float: inline-start; margin-right: 3px;">Description: </strong><p style="margin-bottom: 0px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                                th:text="${product.description}">Product Description</p>
                         </div>
 
                         <div class="panel-footer">

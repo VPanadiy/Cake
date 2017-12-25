@@ -2,6 +2,7 @@ package com.Aleksandr.Cake.model;
 
 import com.Aleksandr.Cake.model.enums.ProductCategory;
 import com.Aleksandr.Cake.model.interfaces.ProductInterface;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -23,10 +24,12 @@ public abstract class AbstractProduct<T extends AbstractProduct> implements Prod
 
     @Column(name = "name")
     @NotEmpty(message = "*Please provide a name for this product")
+    @Length(max = 50, message = "*Field description should be less then 50 symbols")
     private String name;
 
     @Column(name = "description")
     @NotEmpty(message = "*Please provide a description for this product")
+    @Length(max = 255, message = "*Field description should be less then 255 symbols")
     private String description;
 
     @Column(name = "price")
